@@ -32,6 +32,9 @@ header{text-align:center;padding:20px;margin-bottom:30px}
 h2{font-size:1.3rem;margin-bottom:8px;background:linear-gradient(90deg,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{color:rgba(255,255,255,.6);margin-bottom:18px;font-size:.85rem}
 .info{background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.3);border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;line-height:1.8}
+select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(0,240,255,.3);background:#0a0a15;color:#fff;font-size:.95rem;margin-bottom:10px;font-family:inherit}
+select:focus{outline:none;border-color:#00f0ff}
+label{display:block;font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:6px;margin-top:12px}
 .style-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
 .style-btn{background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;cursor:pointer;text-align:center;transition:.3s}
 .style-btn.sel{border-color:#ff00e5;background:rgba(255,0,229,.1)}
@@ -72,39 +75,25 @@ footer{text-align:center;padding:30px;color:rgba(255,255,255,.4);font-size:.8rem
 </section>
 
 <div class="grid">
-<div class="card" onclick="openM('mSens')">
-<div class="ic">🎯</div>
-<h3 id="c1">الحساسيات</h3>
-<p id="c1s">إعدادات مخصصة</p>
-</div>
-<div class="card" onclick="openM('mCh')">
-<div class="ic">🎮</div>
-<h3 id="c2">التحديات</h3>
-<p id="c2s">تحديات Free Fire</p>
-</div>
-<div class="card" onclick="openM('mPr')">
-<div class="ic">🧬</div>
-<h3 id="c3">شخصيتك</h3>
-<p id="c3s">اكتشف أسلوبك</p>
-</div>
-<div class="card" onclick="openM('mCo')">
-<div class="ic">🤖</div>
-<h3 id="c4">المدرب الذكي</h3>
-<p id="c4s">نصائح مخصصة</p>
-</div>
+<div class="card" onclick="openM('mSens')"><div class="ic">🎯</div><h3 id="c1">الحساسيات</h3><p id="c1s">إعدادات مخصصة</p></div>
+<div class="card" onclick="openM('mCh')"><div class="ic">🎮</div><h3 id="c2">التحديات</h3><p id="c2s">تحديات Free Fire</p></div>
+<div class="card" onclick="openM('mPr')"><div class="ic">🧬</div><h3 id="c3">شخصيتك</h3><p id="c3s">اكتشف أسلوبك</p></div>
+<div class="card" onclick="openM('mCo')"><div class="ic">🤖</div><h3 id="c4">المدرب الذكي</h3><p id="c4s">نصائح مخصصة</p></div>
 </div>
 
-<div class="support" onclick="openM('mSu')">
-<div class="ic">🎧</div>
-<h3 id="c5">الدعم</h3>
-</div>
+<div class="support" onclick="openM('mSu')"><div class="ic">🎧</div><h3 id="c5">الدعم</h3></div>
 
 <div class="modal" id="mSens">
 <div class="box">
 <button class="close" onclick="closeM('mSens')">×</button>
+<div id="sensForm">
 <h2 id="st1">🎯 مولّد الحساسية</h2>
-<p class="sub" id="st2">اختر أسلوب لعبك</p>
-<div class="info" id="deviceInfo"></div>
+<p class="sub" id="st2">اختر هاتفك وأسلوب لعبك</p>
+<label id="lb1">الماركة</label>
+<select id="selBrand" onchange="fillModels()"></select>
+<label id="lb2">الموديل</label>
+<select id="selModel"></select>
+<label id="lb3">أسلوب اللعب</label>
 <div class="style-grid">
 <div class="style-btn" onclick="selS('headshot',this)"><div class="ic">🎯</div><h4>Headshot</h4></div>
 <div class="style-btn" onclick="selS('rush',this)"><div class="ic">⚡</div><h4>Rush</h4></div>
@@ -112,6 +101,7 @@ footer{text-align:center;padding:30px;color:rgba(255,255,255,.4);font-size:.8rem
 <div class="style-btn" onclick="selS('sniper',this)"><div class="ic">🔭</div><h4>Sniper</h4></div>
 </div>
 <button class="btn btn-p" id="genBtn" onclick="genS()">✨ ولّد الحساسية</button>
+</div>
 <div id="sensResult"></div>
 </div>
 </div>
@@ -165,14 +155,133 @@ footer{text-align:center;padding:30px;color:rgba(255,255,255,.4);font-size:.8rem
 <footer>© 2026 AYOUB VIP</footer>
 
 <script>
+// ============ DATABASE ============
+// b=brand, m=model, cat=category (b/m/f), r=RAM, g=General, rd=RedDot, s2=2x, s4=4x, sn=Sniper, fl=FreeLook, fb=FireButton, d=DPI
+var DB=[
+// INFINIX
+{b:'Infinix',m:'Hot 50i',cat:'b',r:4,g:195,rd:190,s2:180,s4:165,sn:95,fl:155,fb:90,d:520},
+{b:'Infinix',m:'Hot 40i',cat:'b',r:4,g:195,rd:190,s2:178,s4:163,sn:95,fl:152,fb:90,d:520},
+{b:'Infinix',m:'Hot 30i',cat:'b',r:4,g:193,rd:188,s2:176,s4:161,sn:93,fl:150,fb:89,d:510},
+{b:'Infinix',m:'Hot 30',cat:'b',r:8,g:188,rd:183,s2:172,s4:157,sn:90,fl:148,fb:87,d:500},
+{b:'Infinix',m:'Hot 20',cat:'b',r:4,g:192,rd:187,s2:175,s4:160,sn:92,fl:150,fb:88,d:505},
+{b:'Infinix',m:'Hot 12',cat:'b',r:4,g:194,rd:189,s2:177,s4:162,sn:94,fl:152,fb:90,d:510},
+{b:'Infinix',m:'Note 30',cat:'m',r:8,g:180,rd:175,s2:165,s4:148,sn:82,fl:140,fb:82,d:480},
+{b:'Infinix',m:'Note 30 Pro',cat:'m',r:8,g:178,rd:173,s2:163,s4:146,sn:80,fl:138,fb:80,d:475},
+{b:'Infinix',m:'Note 40',cat:'m',r:8,g:176,rd:171,s2:161,s4:144,sn:78,fl:136,fb:79,d:470},
+{b:'Infinix',m:'Note 40 Pro',cat:'m',r:8,g:174,rd:169,s2:159,s4:142,sn:76,fl:134,fb:78,d:465},
+{b:'Infinix',m:'Zero 30',cat:'f',r:12,g:168,rd:163,s2:152,s4:135,sn:70,fl:128,fb:74,d:450},
+{b:'Infinix',m:'Zero 5G',cat:'m',r:8,g:178,rd:173,s2:163,s4:146,sn:80,fl:138,fb:80,d:475},
+{b:'Infinix',m:'Smart 8',cat:'b',r:4,g:196,rd:191,s2:181,s4:166,sn:96,fl:156,fb:91,d:525},
+{b:'Infinix',m:'Smart 7',cat:'b',r:4,g:196,rd:191,s2:180,s4:165,sn:96,fl:155,fb:91,d:525},
+{b:'Infinix',m:'GT 10 Pro',cat:'f',r:12,g:165,rd:160,s2:148,s4:130,sn:68,fl:125,fb:72,d:445},
+// TECNO
+{b:'Tecno',m:'Spark 20',cat:'b',r:8,g:190,rd:185,s2:174,s4:158,sn:90,fl:148,fb:86,d:500},
+{b:'Tecno',m:'Spark 20 Pro',cat:'b',r:8,g:188,rd:183,s2:172,s4:156,sn:88,fl:146,fb:85,d:498},
+{b:'Tecno',m:'Spark 20C',cat:'b',r:4,g:195,rd:190,s2:180,s4:165,sn:94,fl:153,fb:89,d:518},
+{b:'Tecno',m:'Spark Go 2024',cat:'b',r:4,g:197,rd:192,s2:182,s4:167,sn:96,fl:157,fb:92,d:528},
+{b:'Tecno',m:'Spark 10',cat:'b',r:8,g:191,rd:186,s2:175,s4:160,sn:90,fl:149,fb:87,d:502},
+{b:'Tecno',m:'Spark 10 Pro',cat:'b',r:8,g:189,rd:184,s2:173,s4:158,sn:88,fl:147,fb:86,d:500},
+{b:'Tecno',m:'Camon 20',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'Tecno',m:'Camon 20 Pro',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
+{b:'Tecno',m:'Camon 30',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:76,fl:133,fb:79,d:468},
+{b:'Tecno',m:'Pova 5',cat:'m',r:8,g:177,rd:172,s2:161,s4:144,sn:79,fl:136,fb:80,d:472},
+{b:'Tecno',m:'Pova 5 Pro',cat:'f',r:8,g:172,rd:167,s2:156,s4:140,sn:74,fl:132,fb:76,d:458},
+{b:'Tecno',m:'Phantom X2 Pro',cat:'f',r:12,g:165,rd:160,s2:148,s4:130,sn:68,fl:125,fb:72,d:445},
+// SAMSUNG
+{b:'Samsung',m:'Galaxy A05',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+{b:'Samsung',m:'Galaxy A05s',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
+{b:'Samsung',m:'Galaxy A15',cat:'m',r:4,g:186,rd:181,s2:170,s4:154,sn:85,fl:143,fb:83,d:492},
+{b:'Samsung',m:'Galaxy A25',cat:'m',r:6,g:180,rd:175,s2:164,s4:148,sn:80,fl:138,fb:80,d:480},
+{b:'Samsung',m:'Galaxy A35',cat:'m',r:8,g:175,rd:170,s2:158,s4:142,sn:77,fl:132,fb:78,d:468},
+{b:'Samsung',m:'Galaxy A55',cat:'f',r:8,g:170,rd:165,s2:153,s4:136,sn:73,fl:128,fb:75,d:455},
+{b:'Samsung',m:'Galaxy M14',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
+{b:'Samsung',m:'Galaxy M34',cat:'m',r:6,g:182,rd:177,s2:166,s4:149,sn:81,fl:139,fb:81,d:482},
+{b:'Samsung',m:'Galaxy M54',cat:'f',r:8,g:172,rd:167,s2:155,s4:138,sn:74,fl:130,fb:76,d:460},
+{b:'Samsung',m:'Galaxy S21',cat:'f',r:8,g:166,rd:161,s2:148,s4:130,sn:68,fl:124,fb:72,d:442},
+{b:'Samsung',m:'Galaxy S22',cat:'f',r:8,g:164,rd:159,s2:146,s4:128,sn:66,fl:122,fb:71,d:438},
+{b:'Samsung',m:'Galaxy S23',cat:'f',r:8,g:162,rd:157,s2:144,s4:126,sn:65,fl:120,fb:70,d:435},
+{b:'Samsung',m:'Galaxy S24',cat:'f',r:8,g:160,rd:155,s2:142,s4:124,sn:64,fl:118,fb:70,d:432},
+{b:'Samsung',m:'Galaxy F14',cat:'b',r:4,g:189,rd:184,s2:173,s4:157,sn:88,fl:146,fb:85,d:500},
+{b:'Samsung',m:'Galaxy F34',cat:'m',r:6,g:181,rd:176,s2:165,s4:148,sn:81,fl:138,fb:81,d:480},
+// XIAOMI/REDMI/POCO
+{b:'Xiaomi',m:'Redmi 13C',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+{b:'Xiaomi',m:'Redmi 12',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
+{b:'Xiaomi',m:'Redmi 12C',cat:'b',r:3,g:195,rd:190,s2:180,s4:165,sn:93,fl:153,fb:90,d:515},
+{b:'Xiaomi',m:'Redmi 10',cat:'b',r:4,g:191,rd:186,s2:175,s4:159,sn:89,fl:148,fb:86,d:502},
+{b:'Xiaomi',m:'Redmi Note 13',cat:'m',r:6,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'Xiaomi',m:'Redmi Note 13 Pro',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:77,fl:133,fb:79,d:468},
+{b:'Xiaomi',m:'Redmi Note 12',cat:'m',r:4,g:185,rd:180,s2:169,s4:152,sn:84,fl:142,fb:83,d:488},
+{b:'Xiaomi',m:'Redmi Note 12 Pro',cat:'m',r:6,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'Xiaomi',m:'Redmi Note 11',cat:'m',r:4,g:184,rd:179,s2:168,s4:151,sn:83,fl:141,fb:82,d:485},
+{b:'Xiaomi',m:'POCO M5',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
+{b:'Xiaomi',m:'POCO M6 Pro',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
+{b:'Xiaomi',m:'POCO X5',cat:'m',r:6,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'Xiaomi',m:'POCO X5 Pro',cat:'m',r:8,g:175,rd:170,s2:158,s4:142,sn:77,fl:132,fb:78,d:468},
+{b:'Xiaomi',m:'POCO F5',cat:'f',r:8,g:168,rd:163,s2:150,s4:132,sn:70,fl:126,fb:73,d:448},
+{b:'Xiaomi',m:'POCO F5 Pro',cat:'f',r:12,g:165,rd:160,s2:148,s4:130,sn:68,fl:124,fb:72,d:445},
+{b:'Xiaomi',m:'Xiaomi 13T',cat:'f',r:8,g:166,rd:161,s2:148,s4:130,sn:68,fl:124,fb:72,d:442},
+// IPHONE
+{b:'iPhone',m:'11',cat:'m',r:4,g:180,rd:175,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
+{b:'iPhone',m:'12',cat:'f',r:4,g:174,rd:169,s2:156,s4:138,sn:74,fl:130,fb:76,d:458},
+{b:'iPhone',m:'13',cat:'f',r:4,g:172,rd:167,s2:154,s4:136,sn:73,fl:128,fb:75,d:455},
+{b:'iPhone',m:'14',cat:'f',r:6,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
+{b:'iPhone',m:'15',cat:'f',r:8,g:168,rd:163,s2:150,s4:132,sn:70,fl:124,fb:73,d:448},
+{b:'iPhone',m:'SE 2022',cat:'m',r:4,g:182,rd:177,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'iPhone',m:'XR',cat:'m',r:4,g:183,rd:178,s2:166,s4:149,sn:81,fl:138,fb:82,d:480},
+{b:'iPhone',m:'XS',cat:'m',r:4,g:180,rd:175,s2:163,s4:146,sn:79,fl:136,fb:81,d:476},
+// OPPO
+{b:'Oppo',m:'A17',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+{b:'Oppo',m:'A18',cat:'b',r:4,g:189,rd:184,s2:173,s4:157,sn:87,fl:146,fb:85,d:498},
+{b:'Oppo',m:'A38',cat:'b',r:6,g:186,rd:181,s2:170,s4:154,sn:85,fl:143,fb:83,d:492},
+{b:'Oppo',m:'A58',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'Oppo',m:'A78',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
+{b:'Oppo',m:'A98',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:77,fl:133,fb:79,d:468},
+{b:'Oppo',m:'Reno 8',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
+{b:'Oppo',m:'Reno 10',cat:'f',r:8,g:168,rd:163,s2:150,s4:132,sn:70,fl:124,fb:73,d:448},
+// VIVO
+{b:'Vivo',m:'Y02',cat:'b',r:3,g:195,rd:190,s2:180,s4:165,sn:93,fl:153,fb:90,d:515},
+{b:'Vivo',m:'Y16',cat:'b',r:4,g:191,rd:186,s2:175,s4:159,sn:89,fl:148,fb:86,d:502},
+{b:'Vivo',m:'Y17s',cat:'b',r:6,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
+{b:'Vivo',m:'Y22',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+{b:'Vivo',m:'Y27',cat:'b',r:6,g:187,rd:182,s2:171,s4:155,sn:86,fl:144,fb:84,d:495},
+{b:'Vivo',m:'Y36',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'Vivo',m:'Y78',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
+// REALME
+{b:'Realme',m:'C53',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+{b:'Realme',m:'C55',cat:'b',r:6,g:187,rd:182,s2:171,s4:155,sn:86,fl:144,fb:84,d:495},
+{b:'Realme',m:'C67',cat:'b',r:6,g:186,rd:181,s2:170,s4:154,sn:85,fl:143,fb:83,d:492},
+{b:'Realme',m:'Narzo 60',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
+{b:'Realme',m:'11 Pro',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:77,fl:133,fb:79,d:468},
+{b:'Realme',m:'12 Pro',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
+// HONOR
+{b:'Honor',m:'X6',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+{b:'Honor',m:'X7',cat:'m',r:6,g:184,rd:179,s2:168,s4:151,sn:83,fl:141,fb:82,d:485},
+{b:'Honor',m:'X7b',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
+{b:'Honor',m:'X8',cat:'m',r:6,g:182,rd:177,s2:166,s4:149,sn:81,fl:139,fb:81,d:482},
+{b:'Honor',m:'X9b',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
+// NOKIA
+{b:'Nokia',m:'G21',cat:'b',r:4,g:192,rd:187,s2:176,s4:160,sn:90,fl:149,fb:87,d:505},
+{b:'Nokia',m:'G22',cat:'b',r:4,g:191,rd:186,s2:175,s4:159,sn:89,fl:148,fb:86,d:502},
+{b:'Nokia',m:'C32',cat:'b',r:4,g:194,rd:189,s2:178,s4:162,sn:92,fl:151,fb:88,d:510},
+{b:'Nokia',m:'G42',cat:'m',r:6,g:184,rd:179,s2:168,s4:151,sn:83,fl:141,fb:82,d:485},
+// HUAWEI
+{b:'Huawei',m:'Nova 9',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
+{b:'Huawei',m:'Nova 11',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
+{b:'Huawei',m:'P30',cat:'m',r:6,g:182,rd:177,s2:166,s4:149,sn:81,fl:139,fb:81,d:482},
+{b:'Huawei',m:'Y7a',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+];
+
+// ============ STATE ============
 var lang='ar';
 var selectedStyle=null;
+var selectedPhone=null;
 var prQ=0;
 var prScore={headshot:0,rush:0,balanced:0,sniper:0};
 
+// ============ I18N ============
 var I18N={
-ar:{t1:'أفضل تجربة للاعبي Free Fire 🎮',t2:'مولّد حساسية ذكي، تحديات، مدرب AI',c1:'الحساسيات',c1s:'إعدادات مخصصة',c2:'التحديات',c2s:'تحديات Free Fire',c3:'شخصيتك',c3s:'اكتشف أسلوبك',c4:'المدرب الذكي',c4s:'نصائح مخصصة',c5:'الدعم',st1:'🎯 مولّد الحساسية',st2:'اختر أسلوب لعبك',genBtn:'✨ ولّد الحساسية',cht1:'🎮 مولّد التحديات',cht2:'اختر نوع',prt1:'🧬 اختبار الشخصية',prt2:'5 أسئلة سريعة',prBtn:'🚀 ابدأ',cot1:'🤖 المدرب الذكي',cot2:'نصائح مخصصة',sut1:'🎧 الدعم',sut2:'تواصل معنا'},
-en:{t1:'Best Experience for Free Fire 🎮',t2:'Smart sensitivity, challenges & AI coach',c1:'Sensitivity',c1s:'Custom settings',c2:'Challenges',c2s:'Free Fire challenges',c3:'Personality',c3s:'Discover your style',c4:'AI Coach',c4s:'Personalized tips',c5:'Support',st1:'🎯 Sensitivity Generator',st2:'Choose your playstyle',genBtn:'✨ Generate',cht1:'🎮 Challenge Generator',cht2:'Choose type',prt1:'🧬 Personality Test',prt2:'5 quick questions',prBtn:'🚀 Start',cot1:'🤖 AI Coach',cot2:'Personalized tips',sut1:'🎧 Support',sut2:'Contact us'}
+ar:{t1:'أفضل تجربة للاعبي Free Fire 🎮',t2:'مولّد حساسية ذكي، تحديات، مدرب AI',c1:'الحساسيات',c1s:'إعدادات مخصصة',c2:'التحديات',c2s:'تحديات Free Fire',c3:'شخصيتك',c3s:'اكتشف أسلوبك',c4:'المدرب الذكي',c4s:'نصائح مخصصة',c5:'الدعم',st1:'🎯 مولّد الحساسية',st2:'اختر هاتفك وأسلوب لعبك',lb1:'الماركة',lb2:'الموديل',lb3:'أسلوب اللعب',genBtn:'✨ ولّد الحساسية',cht1:'🎮 مولّد التحديات',cht2:'اختر نوع',prt1:'🧬 اختبار الشخصية',prt2:'5 أسئلة سريعة',prBtn:'🚀 ابدأ',cot1:'🤖 المدرب الذكي',cot2:'نصائح مخصصة',sut1:'🎧 الدعم',sut2:'تواصل معنا'},
+en:{t1:'Best Experience for Free Fire 🎮',t2:'Smart sensitivity, challenges & AI coach',c1:'Sensitivity',c1s:'Custom settings',c2:'Challenges',c2s:'Free Fire challenges',c3:'Personality',c3s:'Discover your style',c4:'AI Coach',c4s:'Personalized tips',c5:'Support',st1:'🎯 Sensitivity Generator',st2:'Choose your phone & style',lb1:'Brand',lb2:'Model',lb3:'Playstyle',genBtn:'✨ Generate',cht1:'🎮 Challenge Generator',cht2:'Choose type',prt1:'🧬 Personality Test',prt2:'5 quick questions',prBtn:'🚀 Start',cot1:'🤖 AI Coach',cot2:'Personalized tips',sut1:'🎧 Support',sut2:'Contact us'}
 };
 
 function setLang(l){
@@ -182,136 +291,8 @@ document.getElementById('btnEn').className=l==='en'?'act':'';
 document.documentElement.lang=l;
 document.documentElement.dir=l==='ar'?'rtl':'ltr';
 var T=I18N[l];
-for(var k in T){var el=document.getElementById(k);if(el)el.textContent=T[k];}
+for(var k in T){var e=document.getElementById(k);if(e)e.textContent=T[k];}
 }
 
-function openM(id){document.getElementById(id).classList.add('open');if(id==='mSens')detectDevice();if(id==='mCo')showCoach();}
-function closeM(id){document.getElementById(id).classList.remove('open');}
-
-function detectDevice(){
-var ua=navigator.userAgent;
-var brand='Unknown',model='Unknown';
-if(/Infinix/i.test(ua))brand='Infinix';
-else if(/Tecno/i.test(ua))brand='Tecno';
-else if(/Redmi|Xiaomi|POCO/i.test(ua))brand='Xiaomi';
-else if(/Samsung|SM-/i.test(ua))brand='Samsung';
-else if(/Oppo/i.test(ua))brand='Oppo';
-else if(/Vivo/i.test(ua))brand='Vivo';
-else if(/Realme/i.test(ua))brand='Realme';
-else if(/iPhone/i.test(ua))brand='iPhone';
-document.getElementById('deviceInfo').innerHTML='📱 '+brand+' '+model+'<br>📺 '+screen.width+'x'+screen.height;
-window._dd={brand:brand,model:model};
-}
-
-function selS(s,el){
-var pcs=document.querySelectorAll('#mSens .style-btn');
-for(var i=0;i<pcs.length;i++)pcs[i].classList.remove('sel');
-el.classList.add('sel');
-selectedStyle=s;
-}
-
-function genS(){
-if(!selectedStyle){alert(lang==='ar'?'اختر أسلوب':'Choose style');return;}
-var ua=navigator.userAgent;
-var base={general:180,red_dot:175,scope_2x:160,scope_4x:140,sniper:80,free_look:120,fire_button:80,dpi:480};
-if(/Infinix|Tecno|Nokia/i.test(ua)){base={general:195,red_dot:190,scope_2x:180,scope_4x:165,sniper:95,free_look:155,fire_button:90,dpi:520};}
-else if(/iPhone 1[1-4]/i.test(ua)){base={general:170,red_dot:165,scope_2x:150,scope_4x:130,sniper:70,free_look:110,fire_button:75,dpi:440};}
-else if(/Samsung|Redmi|Xiaomi|POCO|Oppo|Vivo|Realme/i.test(ua)){base={general:185,red_dot:180,scope_2x:165,scope_4x:148,sniper:85,free_look:128,fire_button:82,dpi:490};}
-if(selectedStyle==='headshot'){base.general+=5;base.red_dot+=5;base.scope_2x+=3;}
-else if(selectedStyle==='rush'){base.general+=10;base.red_dot+=8;base.free_look+=12;base.fire_button=95;}
-else if(selectedStyle==='sniper'){base.scope_4x-=8;base.sniper+=15;base.scope_2x-=5;}
-var sn={headshot:'Headshot',rush:'Rush',balanced:'Balanced',sniper:'Sniper'};
-var html='<h2>✅ '+sn[selectedStyle]+'</h2>';
-html+='<div class="result">';
-html+='<div class="result-item"><span>General</span><span class="v">'+base.general+'</span></div>';
-html+='<div class="result-item"><span>Red Dot</span><span class="v">'+base.red_dot+'</span></div>';
-html+='<div class="result-item"><span>2x Scope</span><span class="v">'+base.scope_2x+'</span></div>';
-html+='<div class="result-item"><span>4x Scope</span><span class="v">'+base.scope_4x+'</span></div>';
-html+='<div class="result-item"><span>Sniper</span><span class="v">'+base.sniper+'</span></div>';
-html+='<div class="result-item"><span>Free Look</span><span class="v">'+base.free_look+'</span></div>';
-html+='<div class="result-item"><span>Fire Button</span><span class="v">'+base.fire_button+'</span></div>';
-html+='<div class="result-item"><span>DPI</span><span class="v">'+base.dpi+'</span></div>';
-html+='</div>';
-html+='<div class="info">🎉 يعطيك الصحة! هذي إعدادات مخصصة لهاتفك.</div>';
-html+='<button class="btn btn-s" onclick="resetSens()">🔄 Try Another</button>';
-document.getElementById('sensResult').innerHTML=html;
-}
-function resetSens(){selectedStyle=null;var pcs=document.querySelectorAll('#mSens .style-btn');for(var i=0;i<pcs.length;i++)pcs[i].classList.remove('sel');document.getElementById('sensResult').innerHTML='';}
-
-var CH={
-aim:[{t:'10 Headshots',d:'Get 10 headshots in one match',p:10},{t:'One-Tap Master',d:'3 consecutive one-tap kills',p:25},{t:'Sniper God',d:'5 long-range kills',p:50}],
-rush:[{t:'First Blood',d:'First kill of match',p:15},{t:'Rusher King',d:'8 kills in 3 min',p:30},{t:'Rampage',d:'15 kills in one match',p:60}],
-sniper:[{t:'Long Shot',d:'Kill from 100m+',p:20},{t:'Silent Killer',d:'5 sniper kills unseen',p:40}]
-};
-function genCh(type,el){
-var pcs=document.querySelectorAll('#mCh .style-btn');
-for(var i=0;i<pcs.length;i++)pcs[i].classList.remove('sel');
-el.classList.add('sel');
-var list=CH[type]||CH.aim;
-var pick=list[Math.floor(Math.random()*list.length)];
-document.getElementById('chResult').innerHTML='<div class="ch-item"><h4>🎯 '+pick.t+'</h4><p>'+pick.d+'</p><p style="color:#ff00e5;font-weight:700;margin-top:8px">+'+pick.p+' Points</p></div>';
-}
-
-var QS=[
-{q:{ar:'كيفاش تبدا المباراة؟',en:'How do you start?'},opts:[{ar:'نهجم بسرعة',en:'Rush',t:'rush'},{ar:'نقنص',en:'Snipe',t:'sniper'},{ar:'نستنى',en:'Wait',t:'balanced'},{ar:'نصطاد الرأس',en:'Headshot',t:'headshot'}]},
-{q:{ar:'السلاح المفضل؟',en:'Favorite weapon?'},opts:[{ar:'MP40',en:'MP40',t:'rush'},{ar:'AWM',en:'AWM',t:'sniper'},{ar:'M4A1',en:'M4A1',t:'balanced'},{ar:'AK',en:'AK',t:'headshot'}]},
-{q:{ar:'وين تقاتل؟',en:'Where do you fight?'},opts:[{ar:'المباني',en:'Buildings',t:'rush'},{ar:'التلال',en:'Hills',t:'sniper'},{ar:'الوسط',en:'Mid',t:'balanced'},{ar:'أي مكان',en:'Anywhere',t:'headshot'}]},
-{q:{ar:'قتلاتك؟',en:'Your kills?'},opts:[{ar:'15+',en:'15+',t:'rush'},{ar:'8-14',en:'8-14',t:'headshot'},{ar:'5-7',en:'5-7',t:'balanced'},{ar:'1-4',en:'1-4',t:'sniper'}]},
-{q:{ar:'دورك في الفريق؟',en:'Your role?'},opts:[{ar:'قائد',en:'Leader',t:'rush'},{ar:'دعم',en:'Support',t:'balanced'},{ar:'قناص',en:'Sniper',t:'sniper'},{ar:'منفرد',en:'Solo',t:'headshot'}]}
-];
-function startPr(){
-prQ=0;prScore={headshot:0,rush:0,balanced:0,sniper:0};
-document.getElementById('prStart').style.display='none';
-document.getElementById('prQuiz').style.display='block';
-document.getElementById('prResult').style.display='none';
-renderQ();
-}
-function renderQ(){
-if(prQ>=QS.length){showPrResult();return;}
-var q=QS[prQ];
-var html='<div style="margin-bottom:16px"><div style="font-size:1rem;margin-bottom:12px;font-weight:600">'+(prQ+1)+'. '+q.q[lang]+'</div>';
-for(var i=0;i<q.opts.length;i++){
-html+='<div class="opt" onclick="ansPr('+i+')">'+q.opts[i][lang]+'</div>';
-}
-html+='</div>';
-document.getElementById('prQuiz').innerHTML=html;
-}
-function ansPr(i){
-prScore[QS[prQ].opts[i].t]++;
-prQ++;
-renderQ();
-}
-function showPrResult(){
-var win='headshot';
-for(var k in prScore){if(prScore[k]>prScore[win])win=k;}
-var info={
-headshot:{em:'🎯',ar:'لاعب Headshot',en:'Headshot Player',ar_d:'دقيق، سريع، تحب الـ One-Tap',en_d:'Precise, fast, love One-Tap'},
-rush:{em:'⚡',ar:'Rusher',en:'Rusher',ar_d:'هجومي، سريع، ما تخافش',en_d:'Aggressive, fast, fearless'},
-balanced:{em:'🧊',ar:'متوازن',en:'Balanced',ar_d:'تفهم اللعبة وتحب التوازن',en_d:'Smart, balanced'},
-sniper:{em:'🔭',ar:'قناص',en:'Sniper',ar_d:'صبور، دقيق، تحب المسافات البعيدة',en_d:'Patient, precise, long range'}
-}[win];
-document.getElementById('prQuiz').style.display='none';
-document.getElementById('prResult').style.display='block';
-document.getElementById('prResult').innerHTML='<div class="big-result"><div class="em">'+info.em+'</div><h3>'+(lang==='ar'?info.ar:info.en)+'</h3><p>'+(lang==='ar'?info.ar_d:info.en_d)+'</p></div><button class="btn btn-s" onclick="startPr()">🔄 '+(lang==='ar'?'مرة أخرى':'Again')+'</button>';
-}
-
-function showCoach(){
-var tips=[
-{ar:'📱 جهازك: '+(window._dd?window._dd.brand:'Unknown'),en:'📱 Device: '+(window._dd?window._dd.brand:'Unknown')},
-{ar:'🎯 جرّب أسلوب Headshot',en:'🎯 Try Headshot style'},
-{ar:'⚙️ DPI: 480 للبداية',en:'⚙️ DPI: 480 to start'},
-{ar:'🎮 تدرّب 30 دقيقة يومياً',en:'🎮 Train 30 min daily'},
-{ar:'🔫 استعمل MP40 قريب',en:'🔫 Use MP40 close'},
-{ar:'🎯 استهدف الرأس',en:'🎯 Aim for head'},
-{ar:'👥 العب مع فريق',en:'👥 Play with team'},
-{ar:'📹 سجّل وراجع',en:'📹 Record & review'}
-];
-var html='';
-for(var i=0;i<tips.length;i++){
-html+='<div class="ch-item"><p>'+tips[i][lang]+'</p></div>';
-}
-document.getElementById('coResult').innerHTML=html;
-}
-</script>
-</body>
-  </html>
+function openM(id){document.getElementById(id).classList.add('open');if(id==='mSens')initSens();if(id==='mCo')showCoach();}
+funct
