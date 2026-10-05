@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AYOUB VIP | Gaming</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
+:root{--n1:#00f0ff;--n2:#ff00e5;--n3:#7c3aed;--bg:#050508;--card:rgba(20,20,35,.6);--b:rgba(0,240,255,.2)}
+body{background:#050508;color:#fff;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(124,58,237,.3),transparent 40%),radial-gradient(circle at 80% 80%,rgba(255,0,229,.3),transparent 40%),radial-gradient(circle at 50% 50%,rgba(0,240,255,.15),transparent 60%);z-index:-1;animation:bg 20s infinite alternate}
+@keyframes bg{to{transform:scale(1.2) rotate(5deg)}}
+header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,8,.5);backdrop-filter:blur(20px);border-bottom:1px solid var(--b);position:sticky;top:0;z-index:100}
+.logo{font-size:1.2rem;font-weight:900;background:linear-gradient(90deg,var(--n1),var(--n2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero{text-align:center;padding:60px 20px 30px}
+.hero h1{font-size:2rem;font-weight:900;background:linear-gradient(90deg,#fff,var(--n1),var(--n2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+.hero p{color:rgba(255,255,255,.7);font-size:.95rem;max-width:500px;margin:0 auto}
+.sections{max-width:1200px;margin:30px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.sc{background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--b);border-radius:20px;padding:24px;text-align:center;cursor:pointer;transition:.4s;position:relative;overflow:hidden}
+.sc:hover{transform:translateY(-6px);border-color:var(--n1);box-shadow:0 20px 60px rgba(0,240,255,.3)}
+.sc .ic{font-size:2.5rem;margin-bottom:12px;filter:drop-shadow(0 0 20px rgba(0,240,255,.6))}
+.sc h3{font-size:1.1rem;margin-bottom:6px}
+.sc p{color:rgba(255,255,255,.6);font-size:.85rem}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);z-index:200;display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.modal.open{display:flex}
+.mc{background:rgba(15,15,25,.98);border:1px solid var(--b);border-radius:20px;max-width:560px;width:100%;padding:28px;max-height:92vh;overflow-y:auto;position:relative;animation:mi .4s}
+@keyframes mi{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.mc h2{font-size:1.5rem;margin-bottom:6px;background:linear-gradient(90deg,var(--n1),var(--n2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.mc .sub{color:rgba(255,255,255,.6);margin-bottom:20px;font-size:.9rem}
+.cb{position:absolute;top:16px;left:16px;background:rgba(255,0,0,.2);border:1px solid rgba(255,0,0,.4);color:#f55;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.1rem}
+.db{background:linear-gradient(135deg,rgba(0,240,255,.1),rgba(124,58,237,.1));border:1px solid var(--b);border-radius:14px;padding:16px;margin-bottom:20px}
+.dr{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.9rem}
+.dr:last-child{border:none}
+.dr .l{color:rgba(255,255,255,.6)}
+.dr .v{color:var(--n1);font-weight:700}
+.ps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:20px 0}
+.pc{background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;cursor:pointer;transition:.3s;text-align:center}
+.pc.sel{border-color:var(--n2);background:rgba(255,0,229,.1);box-shadow:0 0 30px rgba(255,0,229,.3)}
+.pc .pi{font-size:1.8rem;margin-bottom:6px}
+.pc h4{font-size:.95rem}
+.pc p{font-size:.7rem;color:rgba(255,255,255,.5)}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:20px 0}
+.si{background:rgba(255,255,255,.03);border:1px solid var(--b);border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;font-size:.85rem}
+.si .n{color:rgba(255,255,255,.7)}
+.si .v{color:var(--n1);font-weight:900;font-size:1.1rem}
+.btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:1rem;font-weight:800;cursor:pointer;transition:.3s;margin-top:10px;font-family:inherit}
+.bp{background:linear-gradient(135deg,var(--n1),var(--n3));color:#000;box-shadow:0 0 30px rgba(0,240,255,.5)}
+.bp:hover{transform:translateY(-2px)}
+.bs{background:rgba(255,255,255,.05);border:1px solid var(--b);color:#fff}
+.lo{text-align:center;padding:30px}
+.sp{width:45px;height:45px;border:3px solid rgba(0,240,255,.2);border-top-color:var(--n1);border-radius:50%;animation:s 1s linear infinite;margin:0 auto 16px}
+@keyframes s{to{transform:rotate(360deg)}}
+@media(max-width:500px){.hero h1{font-size:1.5rem}.ps{grid-template-columns:1fr}.sg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">👑〆 AYOUB VIP 〆🔥</div>
+</header>
+<section class="hero">
+<h1>منصة اللاعبين الاحترافية</h1>
+<p>مولّد حساسية ذكي، تحديات، بطاقات، ومدرب AI — كل ما تحتاجه للاحتراف.</p>
+</section>
+<div class="sections">
+<div class="sc" onclick="openSens()"><div class="ic">🎯</div><h3>مولّد الحساسية</h3><p>إعدادات مخصصة لهاتفك</p></div>
+<div class="sc" onclick="alert('قريباً')"><div class="ic">🎮</div><h3>مولّد التحديات</h3><p>تحديات Free Fire</p></div>
+<div class="sc" onclick="alert('قريباً')"><div class="ic">🧬</div><h3>اختبار الشخصية</h3><p>اكتشف أسلوبك</p></div>
+<div class="sc" onclick="alert('قريباً')"><div class="ic">🤖</div><h3>المدرب الذكي</h3><p>نصائح مخصصة</p></div>
+<div class="sc" onclick="alert('قريباً')"><div class="ic">🏆</div><h3>النقاط والترتيب</h3><p>نافس اللاعبين</p></div>
+<div class="sc" onclick="alert('قريباً')"><div class="ic">📸</div><h3>بطاقة اللاعب</h3><p>شارك إحصائياتك</p></div>
+</div>
+<div class="modal" id="sm">
+<div class="mc">
+<button class="cb" onclick="closeM()">×</button>
+<div id="s1">
+<h2>🎯 مولّد الحساسية</h2>
+<p class="sub">جاري اكتشاف جهازك...</p>
+<div class="lo"><div class="sp"></div><p>جاري تحليل الجهاز</p></div>
+</div>
+<div id="s2" style="display:none">
+<h2>🎯 اختر أسلوب لعبك</h2>
+<p class="sub">كل أسلوب له إعدادات مختلفة</p>
+<div class="db" id="di"></div>
+<div class="ps">
+<div class="pc" onclick="selS('headshot',this)"><div class="pi">🎯</div><h4>Headshot</h4><p>One-Tap</p></div>
+<div class="pc" onclick="selS('rush',this)"><div class="pi">⚡</div><h4>Rush</h4><p>هجوم سريع</p></div>
+<div class="pc" onclick="selS('balanced',this)"><div class="pi">🧊</div><h4>Balanced</h4><p>متوازن</p></div>
+<div class="pc" onclick="selS('sniper',this)"><div class="pi">🔭</div><h4>Sniper</h4><p>قنص</p></div>
+</div>
+<button class="btn bp" onclick="genS()">✨ ولّد الحساسية</button>
+</div>
+<div id="s3" style="display:none">
+<h2>✅ الحساسية المقترحة</h2>
+<p class="sub" id="rs"></p>
+<div class="sg" id="rg"></div>
+<div class="db"><p style="font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.8" id="rn"></p></div>
+<button class="btn bs" onclick="resetS()">🔄 جرّب أسلوب آخر</button>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SU='https://qgxyuyxcylvvqpqqikoe.supabase.co';
+const SK='sb_publishable_EA44bFpTVd90SWiztI7IXw_gEZXHr6a';
+const sb=supabase.createClient(SU,SK);
+let dd={brand:'Unknown',model:'Unknown'},ss=null;
+function det(){const ua=navigator.userAgent;let b='Unknown',m='Unknown';
+if(/Infinix/i.test(ua))b='Infinix';else if(/Tecno/i.test(ua))b='Tecno';else if(/Redmi|Xiaomi|POCO/i.test(ua))b='Xiaomi';else if(/Samsung|SM-/i.test(ua))b='Samsung';else if(/Oppo/i.test(ua))b='Oppo';else if(/Vivo/i.test(ua))b='Vivo';else if(/Realme/i.test(ua))b='Realme';else if(/iPhone/i.test(ua))b='iPhone';
+if(/iPhone/i.test(ua)){if(/iPhone 14/i.test(ua))m='14';else if(/iPhone 13/i.test(ua))m='13';else if(/iPhone 12/i.test(ua))m='12';else if(/iPhone 11/i.test(ua))m='11';else m='iPhone';}
+return{brand:b,model:m,screen:screen.width+'x'+screen.height,platform:navigator.platform||'Android'};}
+async function openSens(){document.getElementById('sm').classList.add('open');document.getElementById('s1').style.display='block';document.getElementById('s2').style.display='none';document.getElementById('s3').style.display='none';dd=det();
+try{const{data}=await sb.from('devices').select('*').ilike('brand','%'+dd.brand+'%');if(data&&data.length){const mt=data.find(d=>dd.model.toLowerCase().includes(d.model.toLowerCase())||d.model.toLowerCase().includes(dd.model.toLowerCase()))||data[0];dd.matched=mt;}}catch(e){}
+setTimeout(()=>{showDI();document.getElementById('s1').style.display='none';document.getElementById('s2').style.display='block';},1500);}
+function showDI(){const d=dd,m=d.matched;let h='<div class="dr"><span class="l">الشركة</span><span class="v">'+d.brand+'</span></div><div class="dr"><span class="l">الموديل</span><span class="v">'+d.model+'</span></div><div class="dr"><span class="l">الشاشة</span><span class="v">'+d.screen+'</span></div>';
+if(m){h+='<div class="dr"><span class="l">الفئة</span><span class="v">'+(m.category||'?')+'</span></div><div class="dr"><span class="l">RAM</span><span class="v">'+(m.ram||'?')+' GB</span></div>';}else{h+='<div class="dr"><span class="l">ملاحظة</span><span class="v" style="color:#fbbf24">أقرب فئة</span></div>';}
+document.getElementById('di').innerHTML=h;}
+function selS(s,el){document.querySelectorAll('.pc').forEach(p=>p.classList.remove('sel'));el.classList.add('sel');ss=s;}
+async function genS(){if(!ss){alert('اختر أسلوب');return;}const d=dd;let sen=null;
+if(d.matched){try{const{data}=await sb.from('sensitivities').select('*').eq('device_id',d.matched.id).eq('playstyle',ss).single();sen=data;}catch(e){}}
+if(!sen){sen=genF(ss,d);}
+showR(sen,ss);}
+function genF(st,dv){const p={headshot:{general:95,red_dot:92,scope_2x:88,scope_4x:75,sniper:60,free_look:70,fire_button:80,dpi:480,notes:'توازن ممتاز للـ Headshot.'},rush:{general:100,red_dot:98,scope_2x:92,scope_4x:80,sniper:55,free_look:85,fire_button:95,dpi:520,notes:'سرعة عالية للـ Rush.'},balanced:{general:90,red_dot:85,scope_2x:80,scope_4x:70,sniper:65,free_look:65,fire_button:75,dpi:450,notes:'متوازن لكل الأوضاع.'},sniper:{general:75,red_dot:70,scope_2x:65,scope_4x:55,sniper:90,free_look:60,fire_button:70,dpi:400,notes:'دقة عالية للـ Sniper.'}};return p[st]||p.balanced;}
+function showR(s,st){const sn={headshot:'Headshot',rush:'Rush',balanced:'Balanced',sniper:'Sniper'};document.getElementById('rs').textContent='أسلوب: '+sn[st]+' — '+dd.brand+' '+dd.model;
+const it=[{n:'General',v:s.general},{n:'Red Dot',v:s.red_dot},{n:'2x Scope',v:s.scope_2x},{n:'4x Scope',v:s.scope_4x},{n:'Sniper',v:s.sniper},{n:'Free Look',v:s.free_look},{n:'Fire Button',v:s.fire_button}];
+document.getElementById('rg').innerHTML=it.map(i=>'<div class="si"><span class="n">'+i.n+'</span><span class="v">'+i.v+'</span></div>').join('');
+document.getElementById('rn').textContent='📝 '+(s.notes||'')+' • DPI: '+(s.dpi||'N/A');
+document.getElementById('s2').style.display='none';document.getElementById('s3').style.display='block';}
+function resetS(){ss=null;document.querySelectorAll('.pc').forEach(p=>p.classList.remove('sel'));document.getElementById('s3').style.display='none';document.getElementById('s2').style.display='block';}
+function closeM(){document.getElementById('sm').classList.remove('open');}
+document.getElementById('sm').addEventListener('click',e=>{if(e.target.id==='sm')closeM();});
+</script>
+</body>
+                                           </html>
