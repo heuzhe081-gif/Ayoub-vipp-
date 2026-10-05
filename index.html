@@ -1,12 +1,317 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>Test</title></head>
-<body style="background:#000;color:#fff;padding:20px;font-family:sans-serif">
-<h1 id="t">جاري...</h1>
-<button onclick="go()" style="font-size:24px;padding:20px;background:cyan;border:none;border-radius:10px">اضغط</button>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AYOUB VIP</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
+body{background:#050508;color:#fff;min-height:100vh;padding:20px}
+.bg{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(124,58,237,.4),transparent 45%),radial-gradient(circle at 80% 80%,rgba(255,0,229,.35),transparent 45%);z-index:-1}
+header{text-align:center;padding:20px;margin-bottom:30px}
+.logo{font-size:1.4rem;font-weight:900;background:linear-gradient(90deg,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lang{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.lang button{background:rgba(255,255,255,.05);border:1px solid rgba(0,240,255,.3);color:#fff;padding:8px 18px;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:700}
+.lang button.act{background:linear-gradient(135deg,#00f0ff,#7c3aed);color:#000}
+.hero{text-align:center;margin-bottom:30px}
+.hero h1{font-size:1.5rem;font-weight:900;background:linear-gradient(90deg,#fff,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
+.hero p{color:rgba(255,255,255,.6);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:600px;margin:0 auto 20px}
+.card{background:rgba(20,20,35,.7);border:1px solid rgba(0,240,255,.25);border-radius:20px;padding:24px 16px;text-align:center;cursor:pointer;transition:.3s;-webkit-tap-highlight-color:transparent}
+.card:active{transform:scale(.95);border-color:#00f0ff;box-shadow:0 0 30px rgba(0,240,255,.5)}
+.card .ic{font-size:2.5rem;margin-bottom:10px}
+.card h3{font-size:1rem;margin-bottom:4px}
+.card p{color:rgba(255,255,255,.5);font-size:.75rem}
+.support{background:rgba(20,20,35,.7);border:1px solid rgba(0,240,255,.25);border-radius:20px;padding:18px;text-align:center;cursor:pointer;max-width:600px;margin:0 auto}
+.support:active{border-color:#ff00e5}
+.support .ic{font-size:1.8rem;margin-bottom:8px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:100;display:none;padding:20px;overflow-y:auto}
+.modal.open{display:block}
+.box{background:#0f0f19;border:1px solid rgba(0,240,255,.25);border-radius:20px;max-width:560px;margin:20px auto;padding:24px;position:relative}
+.close{position:absolute;top:14px;right:14px;background:rgba(255,0,0,.2);border:1px solid rgba(255,0,0,.4);color:#f55;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.2rem;font-weight:900}
+h2{font-size:1.3rem;margin-bottom:8px;background:linear-gradient(90deg,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:rgba(255,255,255,.6);margin-bottom:18px;font-size:.85rem}
+.info{background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.3);border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;line-height:1.8}
+.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.style-btn{background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;cursor:pointer;text-align:center;transition:.3s}
+.style-btn.sel{border-color:#ff00e5;background:rgba(255,0,229,.1)}
+.style-btn .ic{font-size:1.8rem;margin-bottom:4px}
+.style-btn h4{font-size:.9rem}
+.btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:1rem;font-weight:800;cursor:pointer;margin-top:10px;font-family:inherit}
+.btn-p{background:linear-gradient(135deg,#00f0ff,#7c3aed);color:#000}
+.btn-s{background:rgba(255,255,255,.05);border:1px solid rgba(0,240,255,.3);color:#fff}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+.result-item{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:10px;padding:12px;display:flex;justify-content:space-between;font-size:.85rem}
+.result-item .v{color:#00f0ff;font-weight:900}
+.ch-item{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:12px;padding:14px;margin-bottom:10px}
+.ch-item h4{color:#00f0ff;margin-bottom:6px}
+.ch-item p{color:rgba(255,255,255,.7);font-size:.85rem}
+.opt{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;font-size:.9rem}
+.opt:active{border-color:#ff00e5;background:rgba(255,0,229,.1)}
+.big-result{text-align:center;padding:30px;background:linear-gradient(135deg,rgba(0,240,255,.15),rgba(255,0,229,.15));border:1px solid #00f0ff;border-radius:16px;margin:16px 0}
+.big-result .em{font-size:4rem;margin-bottom:12px}
+.big-result h3{font-size:1.4rem;color:#00f0ff;margin-bottom:10px}
+.big-result p{color:rgba(255,255,255,.85);font-size:.9rem}
+footer{text-align:center;padding:30px;color:rgba(255,255,255,.4);font-size:.8rem;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<header>
+<div class="logo">👑〆 𝑨𝒀𝑶𝑼𝑩ㅤ𝑽𝑰𝑷 〆🔥</div>
+<div class="lang">
+<button id="btnAr" class="act" onclick="setLang('ar')">العربية</button>
+<button id="btnEn" onclick="setLang('en')">English</button>
+</div>
+</header>
+
+<section class="hero">
+<h1 id="t1">أفضل تجربة للاعبي Free Fire 🎮</h1>
+<p id="t2">مولّد حساسية ذكي، تحديات، مدرب AI</p>
+</section>
+
+<div class="grid">
+<div class="card" onclick="openM('mSens')">
+<div class="ic">🎯</div>
+<h3 id="c1">الحساسيات</h3>
+<p id="c1s">إعدادات مخصصة</p>
+</div>
+<div class="card" onclick="openM('mCh')">
+<div class="ic">🎮</div>
+<h3 id="c2">التحديات</h3>
+<p id="c2s">تحديات Free Fire</p>
+</div>
+<div class="card" onclick="openM('mPr')">
+<div class="ic">🧬</div>
+<h3 id="c3">شخصيتك</h3>
+<p id="c3s">اكتشف أسلوبك</p>
+</div>
+<div class="card" onclick="openM('mCo')">
+<div class="ic">🤖</div>
+<h3 id="c4">المدرب الذكي</h3>
+<p id="c4s">نصائح مخصصة</p>
+</div>
+</div>
+
+<div class="support" onclick="openM('mSu')">
+<div class="ic">🎧</div>
+<h3 id="c5">الدعم</h3>
+</div>
+
+<div class="modal" id="mSens">
+<div class="box">
+<button class="close" onclick="closeM('mSens')">×</button>
+<h2 id="st1">🎯 مولّد الحساسية</h2>
+<p class="sub" id="st2">اختر أسلوب لعبك</p>
+<div class="info" id="deviceInfo"></div>
+<div class="style-grid">
+<div class="style-btn" onclick="selS('headshot',this)"><div class="ic">🎯</div><h4>Headshot</h4></div>
+<div class="style-btn" onclick="selS('rush',this)"><div class="ic">⚡</div><h4>Rush</h4></div>
+<div class="style-btn" onclick="selS('balanced',this)"><div class="ic">🧊</div><h4>Balanced</h4></div>
+<div class="style-btn" onclick="selS('sniper',this)"><div class="ic">🔭</div><h4>Sniper</h4></div>
+</div>
+<button class="btn btn-p" id="genBtn" onclick="genS()">✨ ولّد الحساسية</button>
+<div id="sensResult"></div>
+</div>
+</div>
+
+<div class="modal" id="mCh">
+<div class="box">
+<button class="close" onclick="closeM('mCh')">×</button>
+<h2 id="cht1">🎮 مولّد التحديات</h2>
+<p class="sub" id="cht2">اختر نوع</p>
+<div class="style-grid" style="grid-template-columns:1fr 1fr 1fr">
+<div class="style-btn" onclick="genCh('aim',this)"><div class="ic">🎯</div><h4>Aim</h4></div>
+<div class="style-btn" onclick="genCh('rush',this)"><div class="ic">⚡</div><h4>Rush</h4></div>
+<div class="style-btn" onclick="genCh('sniper',this)"><div class="ic">🔭</div><h4>Sniper</h4></div>
+</div>
+<div id="chResult"></div>
+</div>
+</div>
+
+<div class="modal" id="mPr">
+<div class="box">
+<button class="close" onclick="closeM('mPr')">×</button>
+<div id="prStart">
+<h2 id="prt1">🧬 اختبار الشخصية</h2>
+<p class="sub" id="prt2">5 أسئلة سريعة</p>
+<button class="btn btn-p" id="prBtn" onclick="startPr()">🚀 ابدأ</button>
+</div>
+<div id="prQuiz" style="display:none"></div>
+<div id="prResult" style="display:none"></div>
+</div>
+</div>
+
+<div class="modal" id="mCo">
+<div class="box">
+<button class="close" onclick="closeM('mCo')">×</button>
+<h2 id="cot1">🤖 المدرب الذكي</h2>
+<p class="sub" id="cot2">نصائح مخصصة</p>
+<div id="coResult"></div>
+</div>
+</div>
+
+<div class="modal" id="mSu">
+<div class="box">
+<button class="close" onclick="closeM('mSu')">×</button>
+<h2 id="sut1">🎧 الدعم</h2>
+<p class="sub" id="sut2">تواصل معنا</p>
+<a href="https://t.me/" target="_blank" class="btn btn-p" style="display:block;text-align:center;text-decoration:none">📱 Telegram</a>
+<a href="https://wa.me/" target="_blank" class="btn btn-s" style="display:block;text-align:center;text-decoration:none;margin-top:10px">💬 WhatsApp</a>
+</div>
+</div>
+
+<footer>© 2026 AYOUB VIP</footer>
+
 <script>
-document.getElementById('t').textContent='✅ JavaScript يخدم';
-function go(){alert('خدم!');document.getElementById('t').textContent='🎉 نقرت!';}
+var lang='ar';
+var selectedStyle=null;
+var prQ=0;
+var prScore={headshot:0,rush:0,balanced:0,sniper:0};
+
+var I18N={
+ar:{t1:'أفضل تجربة للاعبي Free Fire 🎮',t2:'مولّد حساسية ذكي، تحديات، مدرب AI',c1:'الحساسيات',c1s:'إعدادات مخصصة',c2:'التحديات',c2s:'تحديات Free Fire',c3:'شخصيتك',c3s:'اكتشف أسلوبك',c4:'المدرب الذكي',c4s:'نصائح مخصصة',c5:'الدعم',st1:'🎯 مولّد الحساسية',st2:'اختر أسلوب لعبك',genBtn:'✨ ولّد الحساسية',cht1:'🎮 مولّد التحديات',cht2:'اختر نوع',prt1:'🧬 اختبار الشخصية',prt2:'5 أسئلة سريعة',prBtn:'🚀 ابدأ',cot1:'🤖 المدرب الذكي',cot2:'نصائح مخصصة',sut1:'🎧 الدعم',sut2:'تواصل معنا'},
+en:{t1:'Best Experience for Free Fire 🎮',t2:'Smart sensitivity, challenges & AI coach',c1:'Sensitivity',c1s:'Custom settings',c2:'Challenges',c2s:'Free Fire challenges',c3:'Personality',c3s:'Discover your style',c4:'AI Coach',c4s:'Personalized tips',c5:'Support',st1:'🎯 Sensitivity Generator',st2:'Choose your playstyle',genBtn:'✨ Generate',cht1:'🎮 Challenge Generator',cht2:'Choose type',prt1:'🧬 Personality Test',prt2:'5 quick questions',prBtn:'🚀 Start',cot1:'🤖 AI Coach',cot2:'Personalized tips',sut1:'🎧 Support',sut2:'Contact us'}
+};
+
+function setLang(l){
+lang=l;
+document.getElementById('btnAr').className=l==='ar'?'act':'';
+document.getElementById('btnEn').className=l==='en'?'act':'';
+document.documentElement.lang=l;
+document.documentElement.dir=l==='ar'?'rtl':'ltr';
+var T=I18N[l];
+for(var k in T){var el=document.getElementById(k);if(el)el.textContent=T[k];}
+}
+
+function openM(id){document.getElementById(id).classList.add('open');if(id==='mSens')detectDevice();if(id==='mCo')showCoach();}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+
+function detectDevice(){
+var ua=navigator.userAgent;
+var brand='Unknown',model='Unknown';
+if(/Infinix/i.test(ua))brand='Infinix';
+else if(/Tecno/i.test(ua))brand='Tecno';
+else if(/Redmi|Xiaomi|POCO/i.test(ua))brand='Xiaomi';
+else if(/Samsung|SM-/i.test(ua))brand='Samsung';
+else if(/Oppo/i.test(ua))brand='Oppo';
+else if(/Vivo/i.test(ua))brand='Vivo';
+else if(/Realme/i.test(ua))brand='Realme';
+else if(/iPhone/i.test(ua))brand='iPhone';
+document.getElementById('deviceInfo').innerHTML='📱 '+brand+' '+model+'<br>📺 '+screen.width+'x'+screen.height;
+window._dd={brand:brand,model:model};
+}
+
+function selS(s,el){
+var pcs=document.querySelectorAll('#mSens .style-btn');
+for(var i=0;i<pcs.length;i++)pcs[i].classList.remove('sel');
+el.classList.add('sel');
+selectedStyle=s;
+}
+
+function genS(){
+if(!selectedStyle){alert(lang==='ar'?'اختر أسلوب':'Choose style');return;}
+var ua=navigator.userAgent;
+var base={general:180,red_dot:175,scope_2x:160,scope_4x:140,sniper:80,free_look:120,fire_button:80,dpi:480};
+if(/Infinix|Tecno|Nokia/i.test(ua)){base={general:195,red_dot:190,scope_2x:180,scope_4x:165,sniper:95,free_look:155,fire_button:90,dpi:520};}
+else if(/iPhone 1[1-4]/i.test(ua)){base={general:170,red_dot:165,scope_2x:150,scope_4x:130,sniper:70,free_look:110,fire_button:75,dpi:440};}
+else if(/Samsung|Redmi|Xiaomi|POCO|Oppo|Vivo|Realme/i.test(ua)){base={general:185,red_dot:180,scope_2x:165,scope_4x:148,sniper:85,free_look:128,fire_button:82,dpi:490};}
+if(selectedStyle==='headshot'){base.general+=5;base.red_dot+=5;base.scope_2x+=3;}
+else if(selectedStyle==='rush'){base.general+=10;base.red_dot+=8;base.free_look+=12;base.fire_button=95;}
+else if(selectedStyle==='sniper'){base.scope_4x-=8;base.sniper+=15;base.scope_2x-=5;}
+var sn={headshot:'Headshot',rush:'Rush',balanced:'Balanced',sniper:'Sniper'};
+var html='<h2>✅ '+sn[selectedStyle]+'</h2>';
+html+='<div class="result">';
+html+='<div class="result-item"><span>General</span><span class="v">'+base.general+'</span></div>';
+html+='<div class="result-item"><span>Red Dot</span><span class="v">'+base.red_dot+'</span></div>';
+html+='<div class="result-item"><span>2x Scope</span><span class="v">'+base.scope_2x+'</span></div>';
+html+='<div class="result-item"><span>4x Scope</span><span class="v">'+base.scope_4x+'</span></div>';
+html+='<div class="result-item"><span>Sniper</span><span class="v">'+base.sniper+'</span></div>';
+html+='<div class="result-item"><span>Free Look</span><span class="v">'+base.free_look+'</span></div>';
+html+='<div class="result-item"><span>Fire Button</span><span class="v">'+base.fire_button+'</span></div>';
+html+='<div class="result-item"><span>DPI</span><span class="v">'+base.dpi+'</span></div>';
+html+='</div>';
+html+='<div class="info">🎉 يعطيك الصحة! هذي إعدادات مخصصة لهاتفك.</div>';
+html+='<button class="btn btn-s" onclick="resetSens()">🔄 Try Another</button>';
+document.getElementById('sensResult').innerHTML=html;
+}
+function resetSens(){selectedStyle=null;var pcs=document.querySelectorAll('#mSens .style-btn');for(var i=0;i<pcs.length;i++)pcs[i].classList.remove('sel');document.getElementById('sensResult').innerHTML='';}
+
+var CH={
+aim:[{t:'10 Headshots',d:'Get 10 headshots in one match',p:10},{t:'One-Tap Master',d:'3 consecutive one-tap kills',p:25},{t:'Sniper God',d:'5 long-range kills',p:50}],
+rush:[{t:'First Blood',d:'First kill of match',p:15},{t:'Rusher King',d:'8 kills in 3 min',p:30},{t:'Rampage',d:'15 kills in one match',p:60}],
+sniper:[{t:'Long Shot',d:'Kill from 100m+',p:20},{t:'Silent Killer',d:'5 sniper kills unseen',p:40}]
+};
+function genCh(type,el){
+var pcs=document.querySelectorAll('#mCh .style-btn');
+for(var i=0;i<pcs.length;i++)pcs[i].classList.remove('sel');
+el.classList.add('sel');
+var list=CH[type]||CH.aim;
+var pick=list[Math.floor(Math.random()*list.length)];
+document.getElementById('chResult').innerHTML='<div class="ch-item"><h4>🎯 '+pick.t+'</h4><p>'+pick.d+'</p><p style="color:#ff00e5;font-weight:700;margin-top:8px">+'+pick.p+' Points</p></div>';
+}
+
+var QS=[
+{q:{ar:'كيفاش تبدا المباراة؟',en:'How do you start?'},opts:[{ar:'نهجم بسرعة',en:'Rush',t:'rush'},{ar:'نقنص',en:'Snipe',t:'sniper'},{ar:'نستنى',en:'Wait',t:'balanced'},{ar:'نصطاد الرأس',en:'Headshot',t:'headshot'}]},
+{q:{ar:'السلاح المفضل؟',en:'Favorite weapon?'},opts:[{ar:'MP40',en:'MP40',t:'rush'},{ar:'AWM',en:'AWM',t:'sniper'},{ar:'M4A1',en:'M4A1',t:'balanced'},{ar:'AK',en:'AK',t:'headshot'}]},
+{q:{ar:'وين تقاتل؟',en:'Where do you fight?'},opts:[{ar:'المباني',en:'Buildings',t:'rush'},{ar:'التلال',en:'Hills',t:'sniper'},{ar:'الوسط',en:'Mid',t:'balanced'},{ar:'أي مكان',en:'Anywhere',t:'headshot'}]},
+{q:{ar:'قتلاتك؟',en:'Your kills?'},opts:[{ar:'15+',en:'15+',t:'rush'},{ar:'8-14',en:'8-14',t:'headshot'},{ar:'5-7',en:'5-7',t:'balanced'},{ar:'1-4',en:'1-4',t:'sniper'}]},
+{q:{ar:'دورك في الفريق؟',en:'Your role?'},opts:[{ar:'قائد',en:'Leader',t:'rush'},{ar:'دعم',en:'Support',t:'balanced'},{ar:'قناص',en:'Sniper',t:'sniper'},{ar:'منفرد',en:'Solo',t:'headshot'}]}
+];
+function startPr(){
+prQ=0;prScore={headshot:0,rush:0,balanced:0,sniper:0};
+document.getElementById('prStart').style.display='none';
+document.getElementById('prQuiz').style.display='block';
+document.getElementById('prResult').style.display='none';
+renderQ();
+}
+function renderQ(){
+if(prQ>=QS.length){showPrResult();return;}
+var q=QS[prQ];
+var html='<div style="margin-bottom:16px"><div style="font-size:1rem;margin-bottom:12px;font-weight:600">'+(prQ+1)+'. '+q.q[lang]+'</div>';
+for(var i=0;i<q.opts.length;i++){
+html+='<div class="opt" onclick="ansPr('+i+')">'+q.opts[i][lang]+'</div>';
+}
+html+='</div>';
+document.getElementById('prQuiz').innerHTML=html;
+}
+function ansPr(i){
+prScore[QS[prQ].opts[i].t]++;
+prQ++;
+renderQ();
+}
+function showPrResult(){
+var win='headshot';
+for(var k in prScore){if(prScore[k]>prScore[win])win=k;}
+var info={
+headshot:{em:'🎯',ar:'لاعب Headshot',en:'Headshot Player',ar_d:'دقيق، سريع، تحب الـ One-Tap',en_d:'Precise, fast, love One-Tap'},
+rush:{em:'⚡',ar:'Rusher',en:'Rusher',ar_d:'هجومي، سريع، ما تخافش',en_d:'Aggressive, fast, fearless'},
+balanced:{em:'🧊',ar:'متوازن',en:'Balanced',ar_d:'تفهم اللعبة وتحب التوازن',en_d:'Smart, balanced'},
+sniper:{em:'🔭',ar:'قناص',en:'Sniper',ar_d:'صبور، دقيق، تحب المسافات البعيدة',en_d:'Patient, precise, long range'}
+}[win];
+document.getElementById('prQuiz').style.display='none';
+document.getElementById('prResult').style.display='block';
+document.getElementById('prResult').innerHTML='<div class="big-result"><div class="em">'+info.em+'</div><h3>'+(lang==='ar'?info.ar:info.en)+'</h3><p>'+(lang==='ar'?info.ar_d:info.en_d)+'</p></div><button class="btn btn-s" onclick="startPr()">🔄 '+(lang==='ar'?'مرة أخرى':'Again')+'</button>';
+}
+
+function showCoach(){
+var tips=[
+{ar:'📱 جهازك: '+(window._dd?window._dd.brand:'Unknown'),en:'📱 Device: '+(window._dd?window._dd.brand:'Unknown')},
+{ar:'🎯 جرّب أسلوب Headshot',en:'🎯 Try Headshot style'},
+{ar:'⚙️ DPI: 480 للبداية',en:'⚙️ DPI: 480 to start'},
+{ar:'🎮 تدرّب 30 دقيقة يومياً',en:'🎮 Train 30 min daily'},
+{ar:'🔫 استعمل MP40 قريب',en:'🔫 Use MP40 close'},
+{ar:'🎯 استهدف الرأس',en:'🎯 Aim for head'},
+{ar:'👥 العب مع فريق',en:'👥 Play with team'},
+{ar:'📹 سجّل وراجع',en:'📹 Record & review'}
+];
+var html='';
+for(var i=0;i<tips.length;i++){
+html+='<div class="ch-item"><p>'+tips[i][lang]+'</p></div>';
+}
+document.getElementById('coResult').innerHTML=html;
+}
 </script>
 </body>
-</html>
+  </html>
