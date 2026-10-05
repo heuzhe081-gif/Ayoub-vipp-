@@ -6,293 +6,193 @@
 <title>AYOUB VIP</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
-body{background:#050508;color:#fff;min-height:100vh;padding:20px}
+body{background:#050508;color:#fff;min-height:100vh;padding:16px}
 .bg{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(124,58,237,.4),transparent 45%),radial-gradient(circle at 80% 80%,rgba(255,0,229,.35),transparent 45%);z-index:-1}
-header{text-align:center;padding:20px;margin-bottom:30px}
-.logo{font-size:1.4rem;font-weight:900;background:linear-gradient(90deg,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lang{display:flex;justify-content:center;gap:8px;margin-top:14px}
-.lang button{background:rgba(255,255,255,.05);border:1px solid rgba(0,240,255,.3);color:#fff;padding:8px 18px;border-radius:20px;cursor:pointer;font-size:.85rem;font-weight:700}
-.lang button.act{background:linear-gradient(135deg,#00f0ff,#7c3aed);color:#000}
-.hero{text-align:center;margin-bottom:30px}
-.hero h1{font-size:1.5rem;font-weight:900;background:linear-gradient(90deg,#fff,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
-.hero p{color:rgba(255,255,255,.6);font-size:.9rem}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:600px;margin:0 auto 20px}
-.card{background:rgba(20,20,35,.7);border:1px solid rgba(0,240,255,.25);border-radius:20px;padding:24px 16px;text-align:center;cursor:pointer;transition:.3s;-webkit-tap-highlight-color:transparent}
-.card:active{transform:scale(.95);border-color:#00f0ff;box-shadow:0 0 30px rgba(0,240,255,.5)}
-.card .ic{font-size:2.5rem;margin-bottom:10px}
-.card h3{font-size:1rem;margin-bottom:4px}
-.card p{color:rgba(255,255,255,.5);font-size:.75rem}
-.support{background:rgba(20,20,35,.7);border:1px solid rgba(0,240,255,.25);border-radius:20px;padding:18px;text-align:center;cursor:pointer;max-width:600px;margin:0 auto}
-.support:active{border-color:#ff00e5}
-.support .ic{font-size:1.8rem;margin-bottom:8px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:100;display:none;padding:20px;overflow-y:auto}
+header{text-align:center;padding:16px;margin-bottom:20px}
+.logo{font-size:1.3rem;font-weight:900;background:linear-gradient(90deg,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero{text-align:center;margin-bottom:20px}
+.hero h1{font-size:1.3rem;font-weight:900;background:linear-gradient(90deg,#fff,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:rgba(255,255,255,.6);font-size:.85rem;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:600px;margin:0 auto 16px}
+.card{background:rgba(20,20,35,.7);border:1px solid rgba(0,240,255,.25);border-radius:18px;padding:20px 14px;text-align:center;cursor:pointer}
+.card:active{transform:scale(.95);border-color:#00f0ff}
+.card .ic{font-size:2.2rem;margin-bottom:8px}
+.card h3{font-size:.95rem;margin-bottom:3px}
+.card p{color:rgba(255,255,255,.5);font-size:.7rem}
+.support{background:rgba(20,20,35,.7);border:1px solid rgba(0,240,255,.25);border-radius:18px;padding:16px;text-align:center;cursor:pointer;max-width:600px;margin:0 auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:100;display:none;padding:16px;overflow-y:auto}
 .modal.open{display:block}
-.box{background:#0f0f19;border:1px solid rgba(0,240,255,.25);border-radius:20px;max-width:560px;margin:20px auto;padding:24px;position:relative}
-.close{position:absolute;top:14px;right:14px;background:rgba(255,0,0,.2);border:1px solid rgba(255,0,0,.4);color:#f55;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.2rem;font-weight:900}
-h2{font-size:1.3rem;margin-bottom:8px;background:linear-gradient(90deg,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{color:rgba(255,255,255,.6);margin-bottom:18px;font-size:.85rem}
-.info{background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.3);border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;line-height:1.8}
-select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(0,240,255,.3);background:#0a0a15;color:#fff;font-size:.95rem;margin-bottom:10px;font-family:inherit}
-select:focus{outline:none;border-color:#00f0ff}
-label{display:block;font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:6px;margin-top:12px}
-.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
-.style-btn{background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;cursor:pointer;text-align:center;transition:.3s}
-.style-btn.sel{border-color:#ff00e5;background:rgba(255,0,229,.1)}
-.style-btn .ic{font-size:1.8rem;margin-bottom:4px}
-.style-btn h4{font-size:.9rem}
-.btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:1rem;font-weight:800;cursor:pointer;margin-top:10px;font-family:inherit}
-.btn-p{background:linear-gradient(135deg,#00f0ff,#7c3aed);color:#000}
-.btn-s{background:rgba(255,255,255,.05);border:1px solid rgba(0,240,255,.3);color:#fff}
-.result{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
-.result-item{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:10px;padding:12px;display:flex;justify-content:space-between;font-size:.85rem}
-.result-item .v{color:#00f0ff;font-weight:900}
-.ch-item{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:12px;padding:14px;margin-bottom:10px}
-.ch-item h4{color:#00f0ff;margin-bottom:6px}
-.ch-item p{color:rgba(255,255,255,.7);font-size:.85rem}
-.opt{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;font-size:.9rem}
-.opt:active{border-color:#ff00e5;background:rgba(255,0,229,.1)}
-.big-result{text-align:center;padding:30px;background:linear-gradient(135deg,rgba(0,240,255,.15),rgba(255,0,229,.15));border:1px solid #00f0ff;border-radius:16px;margin:16px 0}
-.big-result .em{font-size:4rem;margin-bottom:12px}
-.big-result h3{font-size:1.4rem;color:#00f0ff;margin-bottom:10px}
-.big-result p{color:rgba(255,255,255,.85);font-size:.9rem}
-footer{text-align:center;padding:30px;color:rgba(255,255,255,.4);font-size:.8rem;margin-top:40px}
+.box{background:#0f0f19;border:1px solid rgba(0,240,255,.25);border-radius:18px;max-width:560px;margin:16px auto;padding:20px;position:relative}
+.close{position:absolute;top:12px;right:12px;background:rgba(255,0,0,.2);border:1px solid rgba(255,0,0,.4);color:#f55;width:30px;height:30px;border-radius:50%;cursor:pointer;font-weight:900}
+h2{font-size:1.2rem;margin-bottom:6px;background:linear-gradient(90deg,#00f0ff,#ff00e5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:rgba(255,255,255,.6);margin-bottom:16px;font-size:.8rem}
+select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(0,240,255,.3);background:#0a0a15;color:#fff;font-size:.9rem;margin-bottom:10px;font-family:inherit}
+label{display:block;font-size:.75rem;color:rgba(255,255,255,.6);margin-bottom:4px;margin-top:10px}
+.styles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.st{background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.1);border-radius:12px;padding:14px;cursor:pointer;text-align:center}
+.st.sel{border-color:#ff00e5;background:rgba(255,0,229,.1)}
+.st .ic{font-size:1.5rem;margin-bottom:3px}
+.st h4{font-size:.8rem}
+.btn{width:100%;padding:13px;border-radius:12px;border:none;font-size:.95rem;font-weight:800;cursor:pointer;margin-top:8px;font-family:inherit}
+.bp{background:linear-gradient(135deg,#00f0ff,#7c3aed);color:#000}
+.bs{background:rgba(255,255,255,.05);border:1px solid rgba(0,240,255,.3);color:#fff}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.ri{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:10px;padding:10px;display:flex;justify-content:space-between;font-size:.8rem}
+.ri .v{color:#00f0ff;font-weight:900}
+.info{background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.3);border-radius:12px;padding:12px;margin:14px 0;font-size:.85rem;text-align:center}
+.ci{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:12px;padding:14px;margin-bottom:8px}
+.ci h4{color:#00f0ff;margin-bottom:4px;font-size:.9rem}
+.ci p{font-size:.8rem;color:rgba(255,255,255,.7)}
+.opt{background:rgba(255,255,255,.03);border:1px solid rgba(0,240,255,.2);border-radius:10px;padding:12px;margin-bottom:6px;cursor:pointer;font-size:.85rem}
+.big{text-align:center;padding:24px;background:linear-gradient(135deg,rgba(0,240,255,.15),rgba(255,0,229,.15));border:1px solid #00f0ff;border-radius:14px;margin:14px 0}
+.big .em{font-size:3.5rem}
+.big h3{font-size:1.2rem;color:#00f0ff;margin:8px 0}
+footer{text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:.75rem;margin-top:30px}
 </style>
 </head>
 <body>
 <div class="bg"></div>
-
-<header>
-<div class="logo">👑〆 𝑨𝒀𝑶𝑼𝑩ㅤ𝑽𝑰𝑷 〆🔥</div>
-<div class="lang">
-<button id="btnAr" class="act" onclick="setLang('ar')">العربية</button>
-<button id="btnEn" onclick="setLang('en')">English</button>
-</div>
-</header>
-
-<section class="hero">
-<h1 id="t1">أفضل تجربة للاعبي Free Fire 🎮</h1>
-<p id="t2">مولّد حساسية ذكي، تحديات، مدرب AI</p>
-</section>
-
+<header><div class="logo">👑〆 𝑨𝒀𝑶𝑼𝑩ㅤ𝑽𝑰𝑷 〆🔥</div></header>
+<section class="hero"><h1>أفضل تجربة للاعبي Free Fire 🎮</h1><p>مولّد حساسية ذكي، تحديات، مدرب AI</p></section>
 <div class="grid">
-<div class="card" onclick="openM('mSens')"><div class="ic">🎯</div><h3 id="c1">الحساسيات</h3><p id="c1s">إعدادات مخصصة</p></div>
-<div class="card" onclick="openM('mCh')"><div class="ic">🎮</div><h3 id="c2">التحديات</h3><p id="c2s">تحديات Free Fire</p></div>
-<div class="card" onclick="openM('mPr')"><div class="ic">🧬</div><h3 id="c3">شخصيتك</h3><p id="c3s">اكتشف أسلوبك</p></div>
-<div class="card" onclick="openM('mCo')"><div class="ic">🤖</div><h3 id="c4">المدرب الذكي</h3><p id="c4s">نصائح مخصصة</p></div>
+<div class="card" onclick="openM('mSens')"><div class="ic">🎯</div><h3>الحساسيات</h3><p>إعدادات مخصصة</p></div>
+<div class="card" onclick="openM('mCh')"><div class="ic">🎮</div><h3>التحديات</h3><p>تحديات Free Fire</p></div>
+<div class="card" onclick="openM('mPr')"><div class="ic">🧬</div><h3>شخصيتك</h3><p>اكتشف أسلوبك</p></div>
+<div class="card" onclick="openM('mCo')"><div class="ic">🤖</div><h3>المدرب الذكي</h3><p>نصائح مخصصة</p></div>
 </div>
-
-<div class="support" onclick="openM('mSu')"><div class="ic">🎧</div><h3 id="c5">الدعم</h3></div>
-
-<div class="modal" id="mSens">
-<div class="box">
+<div class="support" onclick="openM('mSu')"><div class="ic">🎧</div><h3>الدعم</h3></div><div class="modal" id="mSens"><div class="box">
 <button class="close" onclick="closeM('mSens')">×</button>
-<div id="sensForm">
-<h2 id="st1">🎯 مولّد الحساسية</h2>
-<p class="sub" id="st2">اختر هاتفك وأسلوب لعبك</p>
-<label id="lb1">الماركة</label>
-<select id="selBrand" onchange="fillModels()"></select>
-<label id="lb2">الموديل</label>
-<select id="selModel"></select>
-<label id="lb3">أسلوب اللعب</label>
-<div class="style-grid">
-<div class="style-btn" onclick="selS('headshot',this)"><div class="ic">🎯</div><h4>Headshot</h4></div>
-<div class="style-btn" onclick="selS('rush',this)"><div class="ic">⚡</div><h4>Rush</h4></div>
-<div class="style-btn" onclick="selS('balanced',this)"><div class="ic">🧊</div><h4>Balanced</h4></div>
-<div class="style-btn" onclick="selS('sniper',this)"><div class="ic">🔭</div><h4>Sniper</h4></div>
+<div id="sForm">
+<h2>🎯 مولّد الحساسية</h2>
+<p class="sub">اختر هاتفك وأسلوب لعبك</p>
+<label>الماركة</label>
+<select id="b" onchange="fillM()"></select>
+<label>الموديل</label>
+<select id="md"></select>
+<label>أسلوب اللعب</label>
+<div class="styles">
+<div class="st" onclick="sS('headshot',this)"><div class="ic">🎯</div><h4>Headshot</h4></div>
+<div class="st" onclick="sS('rush',this)"><div class="ic">⚡</div><h4>Rush</h4></div>
+<div class="st" onclick="sS('balanced',this)"><div class="ic">🧊</div><h4>Balanced</h4></div>
+<div class="st" onclick="sS('sniper',this)"><div class="ic">🔭</div><h4>Sniper</h4></div>
 </div>
-<button class="btn btn-p" id="genBtn" onclick="genS()">✨ ولّد الحساسية</button>
+<button class="btn bp" onclick="genS()">✨ ولّد الحساسية</button>
 </div>
-<div id="sensResult"></div>
-</div>
-</div>
+<div id="sRes"></div>
+</div></div>
 
-<div class="modal" id="mCh">
-<div class="box">
+<div class="modal" id="mCh"><div class="box">
 <button class="close" onclick="closeM('mCh')">×</button>
-<h2 id="cht1">🎮 مولّد التحديات</h2>
-<p class="sub" id="cht2">اختر نوع</p>
-<div class="style-grid" style="grid-template-columns:1fr 1fr 1fr">
-<div class="style-btn" onclick="genCh('aim',this)"><div class="ic">🎯</div><h4>Aim</h4></div>
-<div class="style-btn" onclick="genCh('rush',this)"><div class="ic">⚡</div><h4>Rush</h4></div>
-<div class="style-btn" onclick="genCh('sniper',this)"><div class="ic">🔭</div><h4>Sniper</h4></div>
+<h2>🎮 مولّد التحديات</h2>
+<p class="sub">اختر نوع</p>
+<div class="styles" style="grid-template-columns:1fr 1fr 1fr">
+<div class="st" onclick="genC('aim',this)"><div class="ic">🎯</div><h4>Aim</h4></div>
+<div class="st" onclick="genC('rush',this)"><div class="ic">⚡</div><h4>Rush</h4></div>
+<div class="st" onclick="genC('sniper',this)"><div class="ic">🔭</div><h4>Sniper</h4></div>
 </div>
-<div id="chResult"></div>
-</div>
-</div>
+<div id="cRes"></div>
+</div></div>
 
-<div class="modal" id="mPr">
-<div class="box">
+<div class="modal" id="mPr"><div class="box">
 <button class="close" onclick="closeM('mPr')">×</button>
-<div id="prStart">
-<h2 id="prt1">🧬 اختبار الشخصية</h2>
-<p class="sub" id="prt2">5 أسئلة سريعة</p>
-<button class="btn btn-p" id="prBtn" onclick="startPr()">🚀 ابدأ</button>
+<div id="pS">
+<h2>🧬 اختبار الشخصية</h2>
+<p class="sub">5 أسئلة سريعة</p>
+<button class="btn bp" onclick="startP()">🚀 ابدأ</button>
 </div>
-<div id="prQuiz" style="display:none"></div>
-<div id="prResult" style="display:none"></div>
-</div>
-</div>
+<div id="pQ" style="display:none"></div>
+<div id="pR" style="display:none"></div>
+</div></div>
 
-<div class="modal" id="mCo">
-<div class="box">
+<div class="modal" id="mCo"><div class="box">
 <button class="close" onclick="closeM('mCo')">×</button>
-<h2 id="cot1">🤖 المدرب الذكي</h2>
-<p class="sub" id="cot2">نصائح مخصصة</p>
-<div id="coResult"></div>
-</div>
-</div>
+<h2>🤖 المدرب الذكي</h2>
+<p class="sub">نصائح مخصصة</p>
+<div id="coRes"></div>
+</div></div>
 
-<div class="modal" id="mSu">
-<div class="box">
+<div class="modal" id="mSu"><div class="box">
 <button class="close" onclick="closeM('mSu')">×</button>
-<h2 id="sut1">🎧 الدعم</h2>
-<p class="sub" id="sut2">تواصل معنا</p>
-<a href="https://t.me/" target="_blank" class="btn btn-p" style="display:block;text-align:center;text-decoration:none">📱 Telegram</a>
-<a href="https://wa.me/" target="_blank" class="btn btn-s" style="display:block;text-align:center;text-decoration:none;margin-top:10px">💬 WhatsApp</a>
-</div>
-</div>
+<h2>🎧 الدعم</h2>
+<p class="sub">تواصل معنا</p>
+<a href="https://t.me/" target="_blank" class="btn bp" style="display:block;text-align:center;text-decoration:none">📱 Telegram</a>
+<a href="https://wa.me/" target="_blank" class="btn bs" style="display:block;text-align:center;text-decoration:none;margin-top:8px">💬 WhatsApp</a>
+</div></div>
 
-<footer>© 2026 AYOUB VIP</footer>
-
-<script>
-// ============ DATABASE ============
-// b=brand, m=model, cat=category (b/m/f), r=RAM, g=General, rd=RedDot, s2=2x, s4=4x, sn=Sniper, fl=FreeLook, fb=FireButton, d=DPI
+<footer>© 2026 AYOUB VIP</footer><script>
 var DB=[
-// INFINIX
-{b:'Infinix',m:'Hot 50i',cat:'b',r:4,g:195,rd:190,s2:180,s4:165,sn:95,fl:155,fb:90,d:520},
-{b:'Infinix',m:'Hot 40i',cat:'b',r:4,g:195,rd:190,s2:178,s4:163,sn:95,fl:152,fb:90,d:520},
-{b:'Infinix',m:'Hot 30i',cat:'b',r:4,g:193,rd:188,s2:176,s4:161,sn:93,fl:150,fb:89,d:510},
-{b:'Infinix',m:'Hot 30',cat:'b',r:8,g:188,rd:183,s2:172,s4:157,sn:90,fl:148,fb:87,d:500},
-{b:'Infinix',m:'Hot 20',cat:'b',r:4,g:192,rd:187,s2:175,s4:160,sn:92,fl:150,fb:88,d:505},
-{b:'Infinix',m:'Hot 12',cat:'b',r:4,g:194,rd:189,s2:177,s4:162,sn:94,fl:152,fb:90,d:510},
-{b:'Infinix',m:'Note 30',cat:'m',r:8,g:180,rd:175,s2:165,s4:148,sn:82,fl:140,fb:82,d:480},
-{b:'Infinix',m:'Note 30 Pro',cat:'m',r:8,g:178,rd:173,s2:163,s4:146,sn:80,fl:138,fb:80,d:475},
-{b:'Infinix',m:'Note 40',cat:'m',r:8,g:176,rd:171,s2:161,s4:144,sn:78,fl:136,fb:79,d:470},
-{b:'Infinix',m:'Note 40 Pro',cat:'m',r:8,g:174,rd:169,s2:159,s4:142,sn:76,fl:134,fb:78,d:465},
-{b:'Infinix',m:'Zero 30',cat:'f',r:12,g:168,rd:163,s2:152,s4:135,sn:70,fl:128,fb:74,d:450},
-{b:'Infinix',m:'Zero 5G',cat:'m',r:8,g:178,rd:173,s2:163,s4:146,sn:80,fl:138,fb:80,d:475},
-{b:'Infinix',m:'Smart 8',cat:'b',r:4,g:196,rd:191,s2:181,s4:166,sn:96,fl:156,fb:91,d:525},
-{b:'Infinix',m:'Smart 7',cat:'b',r:4,g:196,rd:191,s2:180,s4:165,sn:96,fl:155,fb:91,d:525},
-{b:'Infinix',m:'GT 10 Pro',cat:'f',r:12,g:165,rd:160,s2:148,s4:130,sn:68,fl:125,fb:72,d:445},
-// TECNO
-{b:'Tecno',m:'Spark 20',cat:'b',r:8,g:190,rd:185,s2:174,s4:158,sn:90,fl:148,fb:86,d:500},
-{b:'Tecno',m:'Spark 20 Pro',cat:'b',r:8,g:188,rd:183,s2:172,s4:156,sn:88,fl:146,fb:85,d:498},
-{b:'Tecno',m:'Spark 20C',cat:'b',r:4,g:195,rd:190,s2:180,s4:165,sn:94,fl:153,fb:89,d:518},
-{b:'Tecno',m:'Spark Go 2024',cat:'b',r:4,g:197,rd:192,s2:182,s4:167,sn:96,fl:157,fb:92,d:528},
-{b:'Tecno',m:'Spark 10',cat:'b',r:8,g:191,rd:186,s2:175,s4:160,sn:90,fl:149,fb:87,d:502},
-{b:'Tecno',m:'Spark 10 Pro',cat:'b',r:8,g:189,rd:184,s2:173,s4:158,sn:88,fl:147,fb:86,d:500},
-{b:'Tecno',m:'Camon 20',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'Tecno',m:'Camon 20 Pro',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
-{b:'Tecno',m:'Camon 30',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:76,fl:133,fb:79,d:468},
-{b:'Tecno',m:'Pova 5',cat:'m',r:8,g:177,rd:172,s2:161,s4:144,sn:79,fl:136,fb:80,d:472},
-{b:'Tecno',m:'Pova 5 Pro',cat:'f',r:8,g:172,rd:167,s2:156,s4:140,sn:74,fl:132,fb:76,d:458},
-{b:'Tecno',m:'Phantom X2 Pro',cat:'f',r:12,g:165,rd:160,s2:148,s4:130,sn:68,fl:125,fb:72,d:445},
-// SAMSUNG
-{b:'Samsung',m:'Galaxy A05',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
-{b:'Samsung',m:'Galaxy A05s',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
-{b:'Samsung',m:'Galaxy A15',cat:'m',r:4,g:186,rd:181,s2:170,s4:154,sn:85,fl:143,fb:83,d:492},
-{b:'Samsung',m:'Galaxy A25',cat:'m',r:6,g:180,rd:175,s2:164,s4:148,sn:80,fl:138,fb:80,d:480},
-{b:'Samsung',m:'Galaxy A35',cat:'m',r:8,g:175,rd:170,s2:158,s4:142,sn:77,fl:132,fb:78,d:468},
-{b:'Samsung',m:'Galaxy A55',cat:'f',r:8,g:170,rd:165,s2:153,s4:136,sn:73,fl:128,fb:75,d:455},
-{b:'Samsung',m:'Galaxy M14',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
-{b:'Samsung',m:'Galaxy M34',cat:'m',r:6,g:182,rd:177,s2:166,s4:149,sn:81,fl:139,fb:81,d:482},
-{b:'Samsung',m:'Galaxy M54',cat:'f',r:8,g:172,rd:167,s2:155,s4:138,sn:74,fl:130,fb:76,d:460},
-{b:'Samsung',m:'Galaxy S21',cat:'f',r:8,g:166,rd:161,s2:148,s4:130,sn:68,fl:124,fb:72,d:442},
-{b:'Samsung',m:'Galaxy S22',cat:'f',r:8,g:164,rd:159,s2:146,s4:128,sn:66,fl:122,fb:71,d:438},
-{b:'Samsung',m:'Galaxy S23',cat:'f',r:8,g:162,rd:157,s2:144,s4:126,sn:65,fl:120,fb:70,d:435},
-{b:'Samsung',m:'Galaxy S24',cat:'f',r:8,g:160,rd:155,s2:142,s4:124,sn:64,fl:118,fb:70,d:432},
-{b:'Samsung',m:'Galaxy F14',cat:'b',r:4,g:189,rd:184,s2:173,s4:157,sn:88,fl:146,fb:85,d:500},
-{b:'Samsung',m:'Galaxy F34',cat:'m',r:6,g:181,rd:176,s2:165,s4:148,sn:81,fl:138,fb:81,d:480},
-// XIAOMI/REDMI/POCO
-{b:'Xiaomi',m:'Redmi 13C',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
-{b:'Xiaomi',m:'Redmi 12',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
-{b:'Xiaomi',m:'Redmi 12C',cat:'b',r:3,g:195,rd:190,s2:180,s4:165,sn:93,fl:153,fb:90,d:515},
-{b:'Xiaomi',m:'Redmi 10',cat:'b',r:4,g:191,rd:186,s2:175,s4:159,sn:89,fl:148,fb:86,d:502},
-{b:'Xiaomi',m:'Redmi Note 13',cat:'m',r:6,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'Xiaomi',m:'Redmi Note 13 Pro',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:77,fl:133,fb:79,d:468},
-{b:'Xiaomi',m:'Redmi Note 12',cat:'m',r:4,g:185,rd:180,s2:169,s4:152,sn:84,fl:142,fb:83,d:488},
-{b:'Xiaomi',m:'Redmi Note 12 Pro',cat:'m',r:6,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'Xiaomi',m:'Redmi Note 11',cat:'m',r:4,g:184,rd:179,s2:168,s4:151,sn:83,fl:141,fb:82,d:485},
-{b:'Xiaomi',m:'POCO M5',cat:'b',r:4,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
-{b:'Xiaomi',m:'POCO M6 Pro',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
-{b:'Xiaomi',m:'POCO X5',cat:'m',r:6,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'Xiaomi',m:'POCO X5 Pro',cat:'m',r:8,g:175,rd:170,s2:158,s4:142,sn:77,fl:132,fb:78,d:468},
-{b:'Xiaomi',m:'POCO F5',cat:'f',r:8,g:168,rd:163,s2:150,s4:132,sn:70,fl:126,fb:73,d:448},
-{b:'Xiaomi',m:'POCO F5 Pro',cat:'f',r:12,g:165,rd:160,s2:148,s4:130,sn:68,fl:124,fb:72,d:445},
-{b:'Xiaomi',m:'Xiaomi 13T',cat:'f',r:8,g:166,rd:161,s2:148,s4:130,sn:68,fl:124,fb:72,d:442},
-// IPHONE
-{b:'iPhone',m:'11',cat:'m',r:4,g:180,rd:175,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
-{b:'iPhone',m:'12',cat:'f',r:4,g:174,rd:169,s2:156,s4:138,sn:74,fl:130,fb:76,d:458},
-{b:'iPhone',m:'13',cat:'f',r:4,g:172,rd:167,s2:154,s4:136,sn:73,fl:128,fb:75,d:455},
-{b:'iPhone',m:'14',cat:'f',r:6,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
-{b:'iPhone',m:'15',cat:'f',r:8,g:168,rd:163,s2:150,s4:132,sn:70,fl:124,fb:73,d:448},
-{b:'iPhone',m:'SE 2022',cat:'m',r:4,g:182,rd:177,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'iPhone',m:'XR',cat:'m',r:4,g:183,rd:178,s2:166,s4:149,sn:81,fl:138,fb:82,d:480},
-{b:'iPhone',m:'XS',cat:'m',r:4,g:180,rd:175,s2:163,s4:146,sn:79,fl:136,fb:81,d:476},
-// OPPO
-{b:'Oppo',m:'A17',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
-{b:'Oppo',m:'A18',cat:'b',r:4,g:189,rd:184,s2:173,s4:157,sn:87,fl:146,fb:85,d:498},
-{b:'Oppo',m:'A38',cat:'b',r:6,g:186,rd:181,s2:170,s4:154,sn:85,fl:143,fb:83,d:492},
-{b:'Oppo',m:'A58',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'Oppo',m:'A78',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
-{b:'Oppo',m:'A98',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:77,fl:133,fb:79,d:468},
-{b:'Oppo',m:'Reno 8',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
-{b:'Oppo',m:'Reno 10',cat:'f',r:8,g:168,rd:163,s2:150,s4:132,sn:70,fl:124,fb:73,d:448},
-// VIVO
-{b:'Vivo',m:'Y02',cat:'b',r:3,g:195,rd:190,s2:180,s4:165,sn:93,fl:153,fb:90,d:515},
-{b:'Vivo',m:'Y16',cat:'b',r:4,g:191,rd:186,s2:175,s4:159,sn:89,fl:148,fb:86,d:502},
-{b:'Vivo',m:'Y17s',cat:'b',r:6,g:188,rd:183,s2:172,s4:156,sn:87,fl:145,fb:84,d:498},
-{b:'Vivo',m:'Y22',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
-{b:'Vivo',m:'Y27',cat:'b',r:6,g:187,rd:182,s2:171,s4:155,sn:86,fl:144,fb:84,d:495},
-{b:'Vivo',m:'Y36',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'Vivo',m:'Y78',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
-// REALME
-{b:'Realme',m:'C53',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
-{b:'Realme',m:'C55',cat:'b',r:6,g:187,rd:182,s2:171,s4:155,sn:86,fl:144,fb:84,d:495},
-{b:'Realme',m:'C67',cat:'b',r:6,g:186,rd:181,s2:170,s4:154,sn:85,fl:143,fb:83,d:492},
-{b:'Realme',m:'Narzo 60',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
-{b:'Realme',m:'11 Pro',cat:'m',r:8,g:176,rd:171,s2:160,s4:143,sn:77,fl:133,fb:79,d:468},
-{b:'Realme',m:'12 Pro',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
-// HONOR
-{b:'Honor',m:'X6',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
-{b:'Honor',m:'X7',cat:'m',r:6,g:184,rd:179,s2:168,s4:151,sn:83,fl:141,fb:82,d:485},
-{b:'Honor',m:'X7b',cat:'m',r:8,g:180,rd:175,s2:164,s4:147,sn:80,fl:137,fb:81,d:478},
-{b:'Honor',m:'X8',cat:'m',r:6,g:182,rd:177,s2:166,s4:149,sn:81,fl:139,fb:81,d:482},
-{b:'Honor',m:'X9b',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
-// NOKIA
-{b:'Nokia',m:'G21',cat:'b',r:4,g:192,rd:187,s2:176,s4:160,sn:90,fl:149,fb:87,d:505},
-{b:'Nokia',m:'G22',cat:'b',r:4,g:191,rd:186,s2:175,s4:159,sn:89,fl:148,fb:86,d:502},
-{b:'Nokia',m:'C32',cat:'b',r:4,g:194,rd:189,s2:178,s4:162,sn:92,fl:151,fb:88,d:510},
-{b:'Nokia',m:'G42',cat:'m',r:6,g:184,rd:179,s2:168,s4:151,sn:83,fl:141,fb:82,d:485},
-// HUAWEI
-{b:'Huawei',m:'Nova 9',cat:'m',r:8,g:178,rd:173,s2:162,s4:145,sn:78,fl:135,fb:80,d:472},
-{b:'Huawei',m:'Nova 11',cat:'f',r:8,g:170,rd:165,s2:152,s4:134,sn:72,fl:126,fb:74,d:450},
-{b:'Huawei',m:'P30',cat:'m',r:6,g:182,rd:177,s2:166,s4:149,sn:81,fl:139,fb:81,d:482},
-{b:'Huawei',m:'Y7a',cat:'b',r:4,g:190,rd:185,s2:174,s4:158,sn:88,fl:147,fb:85,d:500},
+{b:'Infinix',m:['Hot 50i','Hot 40i','Hot 30i','Hot 30','Hot 20','Note 30','Note 40','Zero 30','Smart 8','GT 10 Pro']},
+{b:'Tecno',m:['Spark 20','Spark 20 Pro','Spark Go 2024','Spark 10','Camon 20','Camon 20 Pro','Pova 5','Phantom X2']},
+{b:'Samsung',m:['A05','A05s','A15','A25','A35','A55','M14','M34','F14','F34','S21','S22','S23','S24']},
+{b:'Xiaomi',m:['Redmi 13C','Redmi 12','Redmi 12C','Redmi Note 13','Redmi Note 13 Pro','Redmi Note 12','POCO M5','POCO X5','POCO F5','Xiaomi 13T']},
+{b:'iPhone',m:['11','12','13','14','15','SE 2022','XR','XS']},
+{b:'Oppo',m:['A17','A18','A38','A58','A78','A98','Reno 8','Reno 10']},
+{b:'Vivo',m:['Y02','Y16','Y17s','Y22','Y27','Y36','Y78']},
+{b:'Realme',m:['C53','C55','C67','Narzo 60','11 Pro','12 Pro']},
+{b:'Honor',m:['X6','X7','X7b','X8','X9b']},
+{b:'Nokia',m:['G21','G22','C32','G42']},
+{b:'Huawei',m:['Nova 9','Nova 11','P30','Y7a']}
 ];
-
-// ============ STATE ============
-var lang='ar';
-var selectedStyle=null;
-var selectedPhone=null;
-var prQ=0;
-var prScore={headshot:0,rush:0,balanced:0,sniper:0};
-
-// ============ I18N ============
-var I18N={
-ar:{t1:'أفضل تجربة للاعبي Free Fire 🎮',t2:'مولّد حساسية ذكي، تحديات، مدرب AI',c1:'الحساسيات',c1s:'إعدادات مخصصة',c2:'التحديات',c2s:'تحديات Free Fire',c3:'شخصيتك',c3s:'اكتشف أسلوبك',c4:'المدرب الذكي',c4s:'نصائح مخصصة',c5:'الدعم',st1:'🎯 مولّد الحساسية',st2:'اختر هاتفك وأسلوب لعبك',lb1:'الماركة',lb2:'الموديل',lb3:'أسلوب اللعب',genBtn:'✨ ولّد الحساسية',cht1:'🎮 مولّد التحديات',cht2:'اختر نوع',prt1:'🧬 اختبار الشخصية',prt2:'5 أسئلة سريعة',prBtn:'🚀 ابدأ',cot1:'🤖 المدرب الذكي',cot2:'نصائح مخصصة',sut1:'🎧 الدعم',sut2:'تواصل معنا'},
-en:{t1:'Best Experience for Free Fire 🎮',t2:'Smart sensitivity, challenges & AI coach',c1:'Sensitivity',c1s:'Custom settings',c2:'Challenges',c2s:'Free Fire challenges',c3:'Personality',c3s:'Discover your style',c4:'AI Coach',c4s:'Personalized tips',c5:'Support',st1:'🎯 Sensitivity Generator',st2:'Choose your phone & style',lb1:'Brand',lb2:'Model',lb3:'Playstyle',genBtn:'✨ Generate',cht1:'🎮 Challenge Generator',cht2:'Choose type',prt1:'🧬 Personality Test',prt2:'5 quick questions',prBtn:'🚀 Start',cot1:'🤖 AI Coach',cot2:'Personalized tips',sut1:'🎧 Support',sut2:'Contact us'}
-};
-
-function setLang(l){
-lang=l;
-document.getElementById('btnAr').className=l==='ar'?'act':'';
-document.getElementById('btnEn').className=l==='en'?'act':'';
-document.documentElement.lang=l;
-document.documentElement.dir=l==='ar'?'rtl':'ltr';
-var T=I18N[l];
-for(var k in T){var e=document.getElementById(k);if(e)e.textContent=T[k];}
+var style=null;
+function openM(id){document.getElementById(id).classList.add('open');if(id==='mSens')initS();if(id==='mCo')showCo();}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+function initS(){
+var s=document.getElementById('b');
+s.innerHTML='<option value="">-- اختر الماركة --</option>';
+for(var i=0;i<DB.length;i++){s.innerHTML+='<option value="'+DB[i].b+'">'+DB[i].b+'</option>';}
+document.getElementById('md').innerHTML='<option value="">-- اختر الموديل --</option>';
 }
-
-function openM(id){document.getElementById(id).classList.add('open');if(id==='mSens')initSens();if(id==='mCo')showCoach();}
-funct
+function fillM(){
+var b=document.getElementById('b').value;
+var md=document.getElementById('md');
+md.innerHTML='<option value="">-- اختر الموديل --</option>';
+if(!b)return;
+for(var i=0;i<DB.length;i++){if(DB[i].b===b){for(var j=0;j<DB[i].m.length;j++){md.innerHTML+='<option>'+DB[i].m[j]+'</option>';}break;}}
+}
+function sS(s,el){var x=document.querySelectorAll('#mSens .st');for(var i=0;i<x.length;i++)x[i].classList.remove('sel');el.classList.add('sel');style=s;}
+function genS(){
+var b=document.getElementById('b').value;
+var m=document.getElementById('md').value;
+if(!b||!m){alert('اختر الماركة والموديل');return;}
+if(!style){alert('اختر أسلوب');return;}
+var base={g:180,rd:175,s2:160,s4:140,sn:80,fl:120,fb:80,d:480};
+if(b==='Infinix'||b==='Tecno'||b==='Nokia'){base={g:195,rd:190,s2:180,s4:165,sn:95,fl:155,fb:90,d:520};}
+else if(b==='iPhone'){base={g:170,rd:165,s2:150,s4:132,sn:70,fl:124,fb:74,d:445};}
+else if(b==='Samsung'){base={g:182,rd:177,s2:165,s4:148,sn:82,fl:140,fb:83,d:485};}
+else if(b==='Xiaomi'){base={g:185,rd:180,s2:168,s4:152,sn:84,fl:142,fb:83,d:488};}
+else if(b==='Oppo'||b==='Vivo'||b==='Realme'){base={g:187,rd:182,s2:170,s4:154,sn:85,fl:143,fb:84,d:492};}
+else if(b==='Honor'||b==='Huawei'){base={g:180,rd:175,s2:163,s4:146,sn:79,fl:136,fb:81,d:476};}
+if(m.indexOf('S2')>=0||m.indexOf('F5')>=0||m.indexOf('13T')>=0||m.indexOf('Zero')>=0||m.indexOf('Phantom')>=0||m.indexOf('15')>=0||m.indexOf('14')>=0||m.indexOf('Reno 10')>=0||m.indexOf('X9b')>=0||m.indexOf('12 Pro')>=0){base.g-=10;base.rd-=10;base.s2-=10;base.s4-=10;base.sn-=8;base.fl-=10;base.d-=30;}
+if(m.indexOf('Smart')>=0||m.indexOf('Spark Go')>=0||m.indexOf('C32')>=0||m.indexOf('Y02')>=0||m.indexOf('12C')>=0||m.indexOf('A05')>=0||m.indexOf('C53')>=0){base.g+=5;base.rd+=5;base.s2+=5;base.s4+=5;base.sn+=5;base.fl+=5;base.d+=20;}
+if(style==='headshot'){base.g+=5;base.rd+=5;base.s2+=3;}
+else if(style==='rush'){base.g+=10;base.rd+=8;base.fl+=12;base.fb=Math.min(200,base.fb+15);}
+else if(style==='sniper'){base.s4-=8;base.sn+=15;base.s2-=5;base.g-=5;}
+for(var k in base){if(typeof base[k]==='number')base[k]=Math.max(0,Math.min(200,base[k]));}
+var sn={headshot:'Headshot',rush:'Rush',balanced:'Balanced',sniper:'Sniper'};
+var h='<h2>✅ '+b+' '+m+'</h2><p class="sub">'+sn[style]+'</p><div class="result">';
+h+='<div class="ri"><span>General</span><span class="v">'+base.g+'</span></div>';
+h+='<div class="ri"><span>Red Dot</span><span class="v">'+base.rd+'</span></div>';
+h+='<div class="ri"><span>2x</span><span class="v">'+base.s2+'</span></div>';
+h+='<div class="ri"><span>4x</span><span class="v">'+base.s4+'</span></div>';
+h+='<div class="ri"><span>Sniper</span><span class="v">'+base.sn+'</span></div>';
+h+='<div class="ri"><span>Free Look</span><span class="v">'+base.fl+'</span></div>';
+h+='<div class="ri"><span>Fire</span><span class="v">'+base.fb+'</span></div>';
+h+='<div class="ri"><span>DPI</span><span class="v">'+base.d+'</span></div></div>';
+h+='<div class="info">🎉 يعطيك الصحة! هذي إعدادات مخصصة لهاتفك.</div>';
+h+='<button class="btn bs" onclick="resetS()">🔄 Try Another</button>';
+document.getElementById('sForm').style.display='none';
+document.getElementById('sRes').innerHTML=h;
+}
+function resetS(){style=null;var x=document.querySelectorAll('#mSens .st');for(var i=0;i<x.length;i++)x[i].classList.remove('sel');document.getElementById('sForm').style.display='block';document.getElementById('sRes').innerHTML='';}
+var CH={aim:[{t:'10 Headshots',d:'10 headshots in one match',p:10},{t:'One-Tap Master',d:'3 consecutive one-taps',p:25},{t:'Sniper God',d:'5 long-range kills',p:50}],rush:[{t:'First Blood',d:'First kill of match',p:15},{t:'Rusher King',d:'8 kills in 3 min',p:30},{t:'Rampage',d:'15 kills in one match',p:60}],sniper:[{t:'Long Shot',d:'Kill from 100m+',p:20},{t:'Silent Killer',d:'5 sniper kills unseen',p:40}]};
+function genC(t,el){var x=document.querySelectorAll('#mCh .st');for(var i=0;i<x.length;i++)x[i].classList.remove('sel');el.classList.add('sel');var l=CH[t]||CH.aim;var p=l[Math.floor(Math.random()*l.length)];document.getElementById('cRes').innerHTML='<div class="ci"><h4>🎯 '+p.t+'</h4><p>'+p.d+'</p><p style="color:#ff00e5;font-weight:700;margin-top:6px">+'+p.p+' Points</p></div>';}
+var QS=[{q:'كيفاش تبدا المباراة؟',o:[{t:'نهجم',y:'rush'},{t:'نقنص',y:'sniper'},{t:'نستنى',y:'balanced'},{t:'نصطاد الرأس',y:'headshot'}]},{q:'السلاح المفضل؟',o:[{t:'MP40',y:'rush'},{t:'AWM',y:'sniper'},{t:'M4A1',y:'balanced'},{t:'AK',y:'headshot'}]},{q:'وين تقاتل؟',o:[{t:'المباني',y:'rush'},{t:'التلال',y:'sniper'},{t:'الوسط',y:'balanced'},{t:'أي مكان',y:'headshot'}]},{q:'قتلاتك؟',o:[{t:'15+',y:'rush'},{t:'8-14',y:'headshot'},{t:'5-7',y:'balanced'},{t:'1-4',y:'sniper'}]},{q:'دورك؟',o:[{t:'قائد',y:'rush'},{t:'دعم',y:'balanced'},{t:'قناص',y:'sniper'},{t:'منفرد',y:'headshot'}]}];
+var pQ=0,pSc={headshot:0,rush:0,balanced:0,sniper:0};
+function startP(){pQ=0;pSc={headshot:0,rush:0,balanced:0,sniper:0};document.getElementById('pS').style.display='none';document.getElementById('pQ').style.display='block';document.getElementById('pR').style.display='none';rQ();}
+function rQ(){if(pQ>=QS.length){showPR();return;}var q=QS[pQ];var h='<div style="margin-bottom:12px"><div style="font-size:.95rem;margin-bottom:10px;font-weight:600">'+(pQ+1)+'. '+q.q+'</div>';for(var i=0;i<q.o.length;i++){h+='<div class="opt" onclick="aP('+i+')">'+q.o[i].t+'</div>';}h+='</div>';document.getElementById('pQ').innerHTML=h;}
+function aP(i){pSc[QS[pQ].o[i].y]++;pQ++;rQ();}
+function showPR(){var w='headshot';for(var k in pSc){if(pSc[k]>pSc[w])w=k;}var inf={headshot:{e:'🎯',t:'لاعب Headshot',d:'دقيق، سريع، تحب الـ One-Tap'},rush:{e:'⚡',t:'Rusher',d:'هجومي، سريع، ما تخافش'},balanced:{e:'🧊',t:'متوازن',d:'تفهم اللعبة وتحب التوازن'},sniper:{e:'🔭',t:'قناص',d:'صبور، دقيق، تحب المسافات البعيدة'}}[w];document.getElementById('pQ').style.display='none';document.getElementById('pR').style.display='block';document.getElementById('pR').innerHTML='<div class="big"><div class="em">'+inf.e+'</div><h3>'+inf.t+'</h3><p>'+inf.d+'</p></div><button class="btn bs" onclick="startP()">🔄 مرة أخرى</button>';}
+function showCo(){var t=['📱 اختر هاتفك من مولّد الحساسية','🎯 جرّب أسلوب Headshot أولاً','⚙️ DPI: كما هو في النتيجة','🎮 تدرّب 30 دقيقة يومياً','🔫 استعمل MP40 للقتال القريب','🎯 استهدف الرأس بالضبط','👥 العب مع فريق','📹 سجّل مبارياتك وراجعها'];var h='';for(var i=0;i<t.length;i++){h+='<div class="ci"><p>'+t[i]+'</p></div>';}document.getElementById('coRes').innerHTML=h;}
+</script>
+</body>
+</html>
